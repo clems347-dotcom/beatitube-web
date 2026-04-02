@@ -2,7 +2,8 @@
   "rewrites": [
     { "source": "/cgu", "destination": "/cgu.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/mentions-legales", "destination": "/mentions-legales.html" }
+    { "source": "/mentions-legales", "destination": "/mentions-legales.html" },
+    { "source": "/auth/reset-password", "destination": "/auth/reset-password.html" }
   ],
   "headers": [
     {
