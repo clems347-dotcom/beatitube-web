@@ -118,7 +118,7 @@
       letter-spacing: 3px;
     }
 
-    .nav-links { display: flex; gap: 24px; }
+    .nav-links { display: flex; gap: 24px; flex-shrink: 1; }
 
     .nav-links a {
       color: var(--text-dim);
@@ -127,6 +127,7 @@
       font-weight: 400;
       transition: color 0.3s;
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     .nav-links a:hover { color: var(--text); }
@@ -458,9 +459,11 @@
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 600px) {
-      nav { padding: 12px 16px; }
-      .nav-links a { font-size: 11px; }
-      .nav-links { gap: 16px; }
+      nav { padding: 10px 12px; }
+      .nav-logo img { width: 20px; }
+      .nav-logo span { font-size: 13px; letter-spacing: 2px; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; letter-spacing: 0; }
       .text-section { padding: 60px 16px; }
     }
   </style>
