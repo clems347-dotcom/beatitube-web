@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://beatitube.com">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="/logo-red.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@
       text-decoration: none;
     }
 
-    .nav-logo img { width: 24px; height: auto; filter: brightness(0) invert(1); }
+    .nav-logo img { width: 24px; height: auto; }
 
     .nav-logo span {
       font-size: 16px;
@@ -144,14 +144,21 @@
       position: relative;
     }
 
+    .hero-logo {
+      width: 72px;
+      height: auto;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 40px var(--red-glow));
+    }
+
     .hero h1 {
-      font-size: clamp(52px, 12vw, 100px);
+      font-size: clamp(36px, 8vw, 56px);
       font-weight: 900;
-      letter-spacing: -2px;
+      letter-spacing: 8px;
       line-height: 1;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       color: var(--red);
-      text-shadow: 0 0 80px var(--red-glow);
+      text-shadow: 0 0 60px var(--red-glow);
     }
 
     .hero .tagline {
@@ -474,7 +481,7 @@
   <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">
-      <img src="/logo.svg" alt="Beat">
+      <img src="/logo-red.svg" alt="Beat">
       <span>BEAT</span>
     </a>
     <div class="nav-links">
@@ -488,7 +495,8 @@
 
     <!-- HERO -->
     <section class="hero">
-      <h1>Beat</h1>
+      <img src="/logo-red.svg" alt="Beat" class="hero-logo">
+      <h1>BEAT</h1>
       <p class="tagline">
         <em>Where sound connects.</em><br>
         Trouve ton audience. Trouve tes futurs hits.
@@ -514,7 +522,7 @@
       <div class="section-label">Le concept</div>
       <h2>Là où la musique se découvre vraiment</h2>
       <p class="lead">
-        Beat est un espace où les artistes indépendants se rendent visibles et où les auditeurs explorent selon leurs préférences. On découvre, on se connecte, on partage. Chaque son est une rencontre. Chaque découverte est un pari.
+        Beat est un espace où les artistes et labels indépendants se rendent visibles et où les auditeurs explorent selon leurs préférences. On découvre, on se connecte, on partage. Chaque son est une rencontre. Chaque découverte est un pari.
       </p>
     </section>
 
