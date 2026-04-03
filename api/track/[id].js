@@ -7,7 +7,7 @@
  */
 
 const SUPABASE_URL = "https://nlqfxjbembgmtvmlbiow.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5scWZ4amJlbWJnbXR2bWxiaW93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0MDMxMTksImV4cCI6MjA1Nzk3OTExOX0.rg4-8xEPMOajVPHFpFMhHPcGBng5VjGPFaNewmxOJmQ";
+const SUPABASE_ANON_KEY = "sb_publishable_aKpH_3mxACQtpbwGePVjVQ_s0VEu2g9";
 
 export default async function handler(req, res) {
   const { id } = req.query;
@@ -26,7 +26,6 @@ export default async function handler(req, res) {
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         },
       }
     );
