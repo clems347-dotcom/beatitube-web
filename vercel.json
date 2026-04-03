@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/track/:id", "destination": "/api/track/:id" },
     { "source": "/cgu", "destination": "/cgu.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/mentions-legales", "destination": "/mentions-legales.html" },
