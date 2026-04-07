@@ -102,13 +102,38 @@
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { width: 24px; height: auto; }
     .nav-logo span { font-size: 16px; font-weight: 800; color: var(--red); letter-spacing: 3px; }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-links { display: flex; gap: 24px; flex-shrink: 1; }
-    .nav-links a {
-      color: var(--text-dim); text-decoration: none; font-size: 14px;
-      font-weight: 400; transition: color 0.3s; letter-spacing: 0.5px; white-space: nowrap;
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    /* Burger */
+    .burger {
+      display: flex; flex-direction: column; gap: 4px;
+      background: none; border: none; cursor: pointer; padding: 8px;
     }
-    .nav-links a:hover { color: var(--text); }
+    .burger span {
+      display: block; width: 20px; height: 2px; background: var(--text-dim);
+      border-radius: 2px; transition: all 0.3s;
+    }
+    .burger:hover span { background: var(--text); }
+
+    /* Dropdown */
+    .nav-dropdown {
+      position: fixed; top: 52px; right: 0; z-index: 99;
+      background: rgba(6, 6, 8, 0.95);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-left: 1px solid rgba(255,255,255,0.04);
+      border-radius: 0 0 0 16px;
+      padding: 0; max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .nav-dropdown.open { max-height: 300px; padding: 12px 0; }
+    .nav-dropdown a {
+      display: block; padding: 12px 28px;
+      color: var(--text-dim); text-decoration: none;
+      font-size: 15px; font-weight: 400; letter-spacing: 0.3px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-dropdown a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
 
     /* ====== HERO ====== */
     .hero {
@@ -197,8 +222,6 @@
       nav { padding: 10px 12px; }
       .nav-logo img { width: 20px; }
       .nav-logo span { font-size: 13px; letter-spacing: 2px; }
-      .nav-links { gap: 12px; }
-      .nav-links a { font-size: 10px; letter-spacing: 0; }
       .text-section { padding: 60px 16px; }
       .text-section h2 { font-size: 28px; }
       .text-section .lead { font-size: 17px; line-height: 1.8; }
@@ -238,20 +261,23 @@
       <span>BEAT</span>
     </a>
     <div class="nav-right">
-      <div class="nav-links">
-        <a href="#concept" class="lang-fr">Concept</a>
-        <a href="#concept" class="lang-en">Concept</a>
-        <a href="#roles" class="lang-fr">Artistes & Pushers</a>
-        <a href="#roles" class="lang-en">Artists & Pushers</a>
-        <a href="#how" class="lang-fr">Comment ça marche</a>
-        <a href="#how" class="lang-en">How it works</a>
-      </div>
       <div class="lang-switch">
         <button onclick="setLang('fr')" id="btn-fr">FR</button>
         <button onclick="setLang('en')" id="btn-en">EN</button>
       </div>
+      <button class="burger" onclick="document.getElementById('nav-menu').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+  <div class="nav-dropdown" id="nav-menu">
+    <a href="#concept" class="lang-fr" onclick="this.parentElement.classList.remove('open')">Concept</a>
+    <a href="#concept" class="lang-en" onclick="this.parentElement.classList.remove('open')">Concept</a>
+    <a href="#roles" class="lang-fr" onclick="this.parentElement.classList.remove('open')">Artistes & Pushers</a>
+    <a href="#roles" class="lang-en" onclick="this.parentElement.classList.remove('open')">Artists & Pushers</a>
+    <a href="#how" class="lang-fr" onclick="this.parentElement.classList.remove('open')">Comment ça marche</a>
+    <a href="#how" class="lang-en" onclick="this.parentElement.classList.remove('open')">How it works</a>
+  </div>
 
   <div class="content">
 
