@@ -214,7 +214,7 @@
       .lang-switch button { font-size: 11px; padding: 3px 8px; }
     }
   </style>
-  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("en")?"en":"fr";document.documentElement.className=p;})()</script>
+  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("fr")?"fr":"en";document.documentElement.className=p;})()</script>
 </head>
 <body>
 
@@ -473,7 +473,7 @@
       if (p === 'en' || p === 'fr') return p;
       const stored = localStorage.getItem('beat-lang');
       if (stored === 'en' || stored === 'fr') return stored;
-      return navigator.language.startsWith('en') ? 'en' : 'fr';
+      return navigator.language.startsWith('fr') ? 'fr' : 'en';
     }
 
     function setLang(lang) {

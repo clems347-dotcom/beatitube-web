@@ -29,7 +29,7 @@
     .doc-footer a { color:var(--text-faint); font-size:13px; margin-right:16px; }
     .doc-footer a:hover { color:var(--text-dim); }
   </style>
-  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("en")?"en":"fr";document.documentElement.className=p;})()</script>
+  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("fr")?"fr":"en";document.documentElement.className=p;})()</script>
 </head>
 <body>
   <div class="container">
@@ -94,7 +94,7 @@
   </div>
 
   <script>
-    function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('en')?'en':'fr';}
+    function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('fr')?'fr':'en';}
     function setLang(l){localStorage.setItem('beat-lang',l);applyLang(l);}
     function applyLang(l){document.documentElement.lang=l;document.documentElement.className=l;document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
     applyLang(getLang());
