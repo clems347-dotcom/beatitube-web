@@ -11,36 +11,86 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Outfit',sans-serif; background:var(--dark); color:var(--text); }
     .container { max-width:700px; margin:0 auto; padding:80px 24px 60px; }
-    .back { display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); text-decoration:none; font-size:13px; font-weight:400; margin-bottom:32px; transition:color .2s; letter-spacing:0.5px; }
+    .lang-fr, .lang-en { display: none; }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+    .back { display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); text-decoration:none; font-size:13px; font-weight:400; transition:color .2s; letter-spacing:0.5px; }
     .back:hover { color:var(--text); }
+    .lang-switch { display:flex; gap:4px; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; }
+    .lang-switch button { background:none; border:none; color:var(--text-faint); font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; padding:4px 10px; border-radius:6px; cursor:pointer; transition:all .2s; }
+    .lang-switch button.active { background:var(--red); color:#fff; }
+    .lang-switch button:hover:not(.active) { color:var(--text-dim); }
     h1 { font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:-0.5px; }
     .doc-meta { font-size:12px; color:var(--text-faint); margin-bottom:36px; margin-top:4px; }
     h2 { font-size:18px; font-weight:700; color:var(--red); margin:28px 0 10px; }
     p { font-size:14px; font-weight:300; color:var(--text-dim); line-height:1.75; margin-bottom:10px; }
     a { color:var(--red); text-decoration:none; }
     a:hover { text-decoration:underline; }
+    .doc-footer { margin-top:40px; padding-top:20px; border-top:1px solid #222; }
+    .doc-footer a { color:var(--text-faint); font-size:13px; margin-right:16px; }
+    .doc-footer a:hover { color:var(--text-dim); }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="/" class="back">← Retour</a>
-    <h1>Mentions légales</h1>
-    <p class="doc-meta">Dernière mise à jour : avril 2026</p>
+    <div class="top-bar">
+      <a href="/" class="back">← <span class="lang-fr">Retour</span><span class="lang-en">Back</span></a>
+      <div class="lang-switch">
+        <button onclick="setLang('fr')" id="btn-fr">FR</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
+    </div>
 
-    <h2>Éditeur</h2>
-    <p>L'application Beat est éditée par Beatitube, projet indépendant de développement.</p>
-    <p>Siège : Rennes, France</p>
-    <p>Contact : <a href="mailto:contact@beatitube.com">contact@beatitube.com</a></p>
+    <h1 class="lang-fr">Mentions légales</h1>
+    <h1 class="lang-en">Legal notice</h1>
+    <p class="doc-meta lang-fr">Dernière mise à jour : avril 2026</p>
+    <p class="doc-meta lang-en">Last updated: April 2026</p>
 
-    <h2>Hébergement</h2>
-    <p>Application et données hébergées par Supabase Inc.<br>Site web hébergé par Vercel Inc.</p>
+    <!-- ==================== FRENCH ==================== -->
+    <div class="lang-fr">
+      <h2>Éditeur</h2>
+      <p>L'application Beat est éditée par Beatitube, projet indépendant de développement.</p>
+      <p>Siège : Rennes, France</p>
+      <p>Contact : <a href="/cdn-cgi/l/email-protection#9af9f5f4eefbf9eedaf8fffbeef3eeeff8ffb4f9f5f7"><span class="__cf_email__" data-cfemail="197a76776d787a6d597b7c786d706d6c7b7c377a7674">[email&#160;protected]</span></a></p>
 
-    <h2>Propriété intellectuelle</h2>
-    <p>Le nom Beat, le logo, le design et le code de l'application sont la propriété exclusive de Beatitube. Toute reproduction est interdite sans autorisation.</p>
+      <h2>Hébergement</h2>
+      <p>Application et données hébergées par Supabase Inc.<br>Site web hébergé par Vercel Inc.</p>
 
-    <h2>Données personnelles</h2>
-    <p>Consultez notre <a href="/privacy">Politique de confidentialité</a>.</p>
-    <p>Contact DPO : <a href="mailto:legal@beatitube.com">legal@beatitube.com</a></p>
+      <h2>Propriété intellectuelle</h2>
+      <p>Le nom Beat, le logo, le design et le code de l'application sont la propriété exclusive de Beatitube. Toute reproduction est interdite sans autorisation.</p>
+
+      <h2>Données personnelles</h2>
+      <p>Consultez notre <a href="/privacy">Politique de confidentialité</a>.</p>
+      <p>Contact DPO : <a href="/cdn-cgi/l/email-protection#0b676e6c6a674b696e6a7f627f7e696e25686466"><span class="__cf_email__" data-cfemail="4a262f2d2b260a282f2b3e233e3f282f64292527">[email&#160;protected]</span></a></p>
+    </div>
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="lang-en">
+      <h2>Publisher</h2>
+      <p>The Beat app is published by Beatitube, an independent development project.</p>
+      <p>Headquarters: Rennes, France</p>
+      <p>Contact: <a href="/cdn-cgi/l/email-protection#5b3834352f3a382f1b393e3a2f322f2e393e75383436"><span class="__cf_email__" data-cfemail="a0c3cfced4c1c3d4e0c2c5c1d4c9d4d5c2c58ec3cfcd">[email&#160;protected]</span></a></p>
+
+      <h2>Hosting</h2>
+      <p>App and data hosted by Supabase Inc.<br>Website hosted by Vercel Inc.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The Beat name, logo, design and application code are the exclusive property of Beatitube. Any reproduction is prohibited without authorization.</p>
+
+      <h2>Personal data</h2>
+      <p>See our <a href="/privacy">Privacy Policy</a>.</p>
+      <p>DPO contact: <a href="/cdn-cgi/l/email-protection#cfa3aaa8aea38fadaaaebba6bbbaadaae1aca0a2"><span class="__cf_email__" data-cfemail="e08c8587818ca0828581948994958285ce838f8d">[email&#160;protected]</span></a></p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      <a href="/cgu" class="lang-fr">CGU</a>
+      <a href="/cgu" class="lang-en">Terms</a>
+      <a href="/privacy" class="lang-fr">Confidentialité</a>
+      <a href="/privacy" class="lang-en">Privacy</a>
+      <a href="/copyright">Copyright</a>
+      <a href="/">Beat</a>
+    </div>
   </div>
-</body>
-</html>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function getLang(){const p=new URLSearchParams(location.search).get('lang');if

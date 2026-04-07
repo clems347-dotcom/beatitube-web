@@ -11,203 +11,250 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Outfit',sans-serif; background:var(--dark); color:var(--text); }
     .container { max-width:700px; margin:0 auto; padding:80px 24px 60px; }
-    .back {
-      display:inline-flex; align-items:center; gap:6px;
-      color:var(--text-dim); text-decoration:none; font-size:13px;
-      font-weight:400; margin-bottom:32px; transition:color .2s;
-      letter-spacing:0.5px;
-    }
+    .lang-fr, .lang-en { display: none; }
+    .back { display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); text-decoration:none; font-size:13px; font-weight:400; margin-bottom:32px; transition:color .2s; letter-spacing:0.5px; }
     .back:hover { color:var(--text); }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+    .lang-switch { display:flex; gap:4px; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; }
+    .lang-switch button { background:none; border:none; color:var(--text-faint); font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; padding:4px 10px; border-radius:6px; cursor:pointer; transition:all .2s; }
+    .lang-switch button.active { background:var(--red); color:#fff; }
+    .lang-switch button:hover:not(.active) { color:var(--text-dim); }
     h1 { font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:-0.5px; }
     .doc-subtitle { font-size:15px; color:var(--text-dim); font-weight:400; }
     .doc-meta { font-size:12px; color:var(--text-faint); margin-bottom:36px; margin-top:4px; }
     h2 { font-size:18px; font-weight:700; color:var(--red); margin:28px 0 10px; }
     h3 { font-size:15px; font-weight:600; color:var(--text); margin:16px 0 6px; }
     p { font-size:14px; font-weight:300; color:var(--text-dim); line-height:1.75; margin-bottom:10px; }
-    .bullet { padding-left:16px; position:relative; }
-    .bullet::before { content:"·"; position:absolute; left:4px; color:var(--red); font-weight:700; }
-    .doc-footer { margin-top:32px; font-size:13px; color:var(--text-faint); font-style:italic; }
     a { color:var(--red); text-decoration:none; }
     a:hover { text-decoration:underline; }
+    .doc-footer { margin-top:40px; padding-top:20px; border-top:1px solid #222; }
+    .doc-footer a { color:var(--text-faint); font-size:13px; margin-right:16px; }
+    .doc-footer a:hover { color:var(--text-dim); }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="/" class="back">← Retour</a>
+    <div class="top-bar">
+      <a href="/" class="back">← <span class="lang-fr">Retour</span><span class="lang-en">Back</span></a>
+      <div class="lang-switch">
+        <button onclick="setLang('fr')" id="btn-fr">FR</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
+    </div>
+
     <p class="doc-subtitle">Application Beat</p>
-    <p class="doc-meta">Date d'entrée en vigueur : 20 mars 2026 — Version 1.0</p>
-    <h2>Préambule</h2>
-    <p>La présente Politique de Confidentialité décrit comment vos données personnelles sont collectées, utilisées, partagées et protégées lorsque vous utilisez l'application mobile Beat (ci-après « l'Application »).</p>
-    <p>Beat est édité par BeatItube, projet indépendant basé à Rennes, France (ci-après « l'Éditeur » ou « nous »). L'Éditeur agit en qualité de responsable du traitement de vos données personnelles.</p>
-    <p>Nous nous engageons à respecter votre vie privée et à protéger vos données personnelles conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés.</p>
-    <h2>1. Données personnelles collectées</h2>
-    <p>Dans le cadre de votre utilisation de l'Application, nous collectons les catégories de données personnelles suivantes :</p>
-    <h3>1.1 Données de compte</h3>
-    <p>— Adresse e-mail<br>
-          — Nom d'utilisateur (handle)<br>
-          — Mot de passe (chiffré, jamais stocké en clair)<br>
-          — Avatar / photo de profil<br>
-          — Date de création du compte<br>
-          — Méthode d'authentification (email/mot de passe, Google, Apple)</p>
-    <h3>1.2 Données de préférences musicales</h3>
-    <p>— Genres musicaux sélectionnés<br>
-          — Préférences de filtrage du feed (cadran : Profil/Filtre1/Filtre2/Setup)<br>
-          — Historique de « pushes » (promotions de contenus)<br>
-          — Historique d'écoutes</p>
-    <h3>1.3 Contenus publiés</h3>
-    <p>— Fichiers audio (extraits musicaux de 60 secondes maximum)<br>
-          — Métadonnées des contenus (titre, description, paroles, tags, plateformes musicales)<br>
-          — Pochettes / images associées aux contenus<br>
-          — Commentaires et interactions</p>
-    <h3>1.4 Données d'interactions sociales</h3>
-    <p>— Liste des comptes suivis et abonnés<br>
-          — Historique de pushes donnés et reçus<br>
-          — Commentaires publiés<br>
-          — Signalements effectués</p>
-    <h3>1.5 Données techniques et de connexion</h3>
-    <p>— Type d'appareil (iOS/Android)<br>
-          — Version du système d'exploitation<br>
-          — Version de l'Application<br>
-          — Adresse IP<br>
-          — Logs de connexion (date et heure)<br>
-          — Données de crash et d'erreurs techniques</p>
-    <h2>2. Finalités du traitement</h2>
-    <p>Vos données personnelles sont collectées et traitées pour les finalités suivantes :</p>
-    <h3>2.1 Fourniture et gestion du service</h3>
-    <p>— Création et gestion de votre compte utilisateur<br>
-          — Authentification et contrôle d'accès<br>
-          — Fourniture des fonctionnalités de l'Application (feed, push, recherche, profil)<br>
-          — Personnalisation de l'expérience utilisateur (recommandations musicales basées sur vos préférences)</p>
-    <h3>2.2 Communication</h3>
-    <p>— Notifications relatives à l'activité de votre compte (nouveaux followers, pushes reçus, commentaires)<br>
-          — Communications transactionnelles (confirmation d'inscription, réinitialisation de mot de passe)<br>
-          — Informations importantes concernant les évolutions de l'Application ou des présentes conditions</p>
-    <h3>2.3 Amélioration et développement du service</h3>
-    <p>— Analyse statistique anonymisée de l'utilisation de l'Application<br>
-          — Détection et correction de bugs techniques<br>
-          — Développement de nouvelles fonctionnalités<br>
-          — Tests A/B et optimisation de l'interface utilisateur</p>
-    <h3>2.4 Sécurité et modération</h3>
-    <p>— Prévention de la fraude et des abus<br>
-          — Détection de comportements malveillants (spam, bots)<br>
-          — Modération des contenus signalés<br>
-          — Respect des présentes conditions et des règles de la communauté</p>
-    <h3>2.5 Obligations légales</h3>
-    <p>— Réponse aux obligations légales et réquisitions des autorités compétentes<br>
-          — Conservation de données pour respect des durées légales de conservation</p>
-    <h2>3. Base juridique du traitement</h2>
-    <p>Conformément au RGPD, les traitements de données personnelles reposent sur les bases juridiques suivantes :</p>
-    <p>— Exécution du contrat (CGU) : traitement nécessaire à la fourniture du service<br>
-          — Intérêt légitime de l'Éditeur : amélioration du service, sécurité, prévention de la fraude<br>
-          — Consentement : pour les communications marketing (si activées à l'avenir)<br>
-          — Obligations légales : conservation de données pour conformité juridique</p>
-    <h2>4. Destinataires des données</h2>
-    <p>Vos données personnelles sont destinées en priorité à l'Éditeur et, dans la stricte limite du nécessaire, à certains prestataires techniques :</p>
-    <h3>4.1 Hébergement et infrastructure</h3>
-    <p>— Supabase (infrastructure backend et base de données)<br>
-          Localisation : États-Unis et Union Européenne<br>
-          Certifications : SOC 2, conforme RGPD<br>
-          Fonction : stockage sécurisé des données utilisateurs, authentification, base de données PostgreSQL</p>
-    <h3>4.2 Stockage de fichiers</h3>
-    <p>— Supabase Storage (fichiers audio, images)<br>
-          Fonction : hébergement des contenus audio et visuels publiés par les utilisateurs</p>
-    <h3>4.3 Authentification tierce (si utilisée)</h3>
-    <p>— Google Sign-In (si vous choisissez cette méthode de connexion)<br>
-          — Apple Sign-In (si vous choisissez cette méthode de connexion)<br>
-          Données partagées : nom, adresse e-mail, identifiant unique</p>
-    <h3>4.4 Engagement de non-vente des données</h3>
-    <p>L'Éditeur s'engage formellement à ne pas vendre, louer ou céder vos données personnelles à des tiers à des fins commerciales ou publicitaires. Vos données ne constituent en aucun cas une monnaie d'échange.</p>
-    <h3>4.5 Absence de partage avec des tiers non essentiels</h3>
-    <p>Aucune donnée personnelle n'est partagée avec des régies publicitaires, des courtiers en données (data brokers), des plateformes de ciblage publicitaire ou tout autre tiers à des fins de profilage, marketing ou monétisation.</p>
-    <h2>5. Transferts de données hors Union Européenne</h2>
-    <p>Certaines de vos données personnelles peuvent être hébergées ou traitées en dehors de l'Union Européenne, notamment via l'utilisation de Supabase (infrastructure hébergée aux États-Unis et en Europe).</p>
-    <p>Ces transferts sont encadrés par des garanties appropriées conformément au RGPD, notamment :<br><br>
-          — Clauses contractuelles types approuvées par la Commission Européenne<br>
-          — Certifications de sécurité (SOC 2)<br>
-          — Mesures techniques et organisationnelles pour assurer un niveau de protection équivalent à celui de l'UE</p>
-    <h2>6. Durée de conservation des données</h2>
-    <p>Vos données personnelles sont conservées pour la durée strictement nécessaire aux finalités pour lesquelles elles ont été collectées :</p>
-    <h3>6.1 Données de compte actif</h3>
-    <p>— Données de profil et de préférences : conservées pendant toute la durée d'utilisation de l'Application<br>
-          — Contenus publiés : conservés tant que vous ne les supprimez pas manuellement</p>
-    <h3>6.2 Données après suppression du compte</h3>
-    <p>— Suppression complète de vos données personnelles dans un délai de 30 jours suivant la désactivation de votre compte<br>
-          — Conservation de certaines données pour obligations légales (logs de sécurité, transactions) : durée légale applicable (généralement 1 an pour les logs de connexion)</p>
-    <h3>6.3 Données techniques et logs</h3>
-    <p>— Logs de connexion et données techniques : 12 mois maximum<br>
-          — Données de crash et erreurs : 6 mois maximum</p>
-    <h2>7. Sécurité des données</h2>
-    <p>L'Éditeur met en œuvre toutes les mesures techniques et organisationnelles appropriées pour garantir la sécurité et la confidentialité de vos données personnelles, notamment :</p>
-    <h3>7.1 Mesures techniques</h3>
-    <p>— Chiffrement des données sensibles (mots de passe, tokens d'authentification)<br>
-          — Protocoles de communication sécurisés (HTTPS/TLS)<br>
-          — Hébergement sur infrastructure certifiée SOC 2 (Supabase)<br>
-          — Sauvegardes régulières et chiffrées<br>
-          — Système de détection d'intrusion et de surveillance des accès</p>
-    <h3>7.2 Mesures organisationnelles</h3>
-    <p>— Politique d'accès restreint aux données (principe du moindre privilège)<br>
-          — Procédures de gestion des incidents de sécurité<br>
-          — Audits réguliers de sécurité<br>
-          — Sensibilisation aux bonnes pratiques de sécurité</p>
-    <h3>7.3 Notification en cas de violation de données</h3>
-    <p>En cas de violation de données personnelles susceptible d'engendrer un risque élevé pour vos droits et libertés, l'Éditeur s'engage à :<br><br>
-          — Notifier la CNIL dans les 72 heures suivant la découverte de la violation<br>
-          — Vous informer directement et sans délai si la violation présente un risque élevé pour vous<br>
-          — Mettre en œuvre toutes les mesures correctives nécessaires</p>
-    <h2>8. Vos droits sur vos données personnelles</h2>
-    <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits suivants concernant vos données personnelles :</p>
-    <h3>8.1 Droit d'accès</h3>
-    <p>Vous avez le droit d'obtenir la confirmation que des données vous concernant sont ou non traitées, et d'accéder à ces données. Vous pouvez demander une copie de vos données personnelles dans un format structuré.</p>
-    <h3>8.2 Droit de rectification</h3>
-    <p>Vous pouvez demander la rectification de vos données personnelles inexactes ou incomplètes. Certaines données peuvent être modifiées directement depuis les paramètres de l'Application (nom d'utilisateur, avatar, préférences).</p>
-    <h3>8.3 Droit à l'effacement (« droit à l'oubli »)</h3>
-    <p>Vous pouvez demander la suppression de vos données personnelles dans les cas prévus par le RGPD. La suppression de votre compte entraîne l'effacement définitif de toutes vos données personnelles dans un délai de 30 jours, sauf obligations légales de conservation.</p>
-    <h3>8.4 Droit à la portabilité</h3>
-    <p>Vous pouvez demander à recevoir vos données personnelles dans un format structuré, couramment utilisé et lisible par machine, ou demander leur transmission directe à un autre responsable de traitement.</p>
-    <h3>8.5 Droit à la limitation du traitement</h3>
-    <p>Vous pouvez demander la limitation du traitement de vos données personnelles dans certaines circonstances (contestation de l'exactitude, traitement illicite, opposition au traitement).</p>
-    <h3>8.6 Droit d'opposition</h3>
-    <p>Vous pouvez vous opposer à tout moment, pour des raisons tenant à votre situation particulière, à un traitement de vos données personnelles fondé sur l'intérêt légitime.</p>
-    <h3>8.7 Droit de retirer votre consentement</h3>
-    <p>Lorsque le traitement est fondé sur votre consentement, vous pouvez le retirer à tout moment. Ce retrait n'affecte pas la licéité du traitement effectué avant le retrait du consentement.</p>
-    <h3>8.8 Exercice de vos droits</h3>
-    <p>Pour exercer l'un de ces droits, vous pouvez nous contacter à l'adresse e-mail suivante : contact@beatitube.com</p>
-    <p>Nous nous engageons à répondre à votre demande dans un délai d'un mois à compter de sa réception. Ce délai peut être prolongé de deux mois en cas de complexité de la demande.</p>
-    <p>Afin de garantir la sécurité de vos données, nous pourrons vous demander de justifier de votre identité avant de donner suite à votre demande.</p>
-    <h3>8.9 Réclamation auprès de la CNIL</h3>
-    <p>Si vous estimez que vos droits ne sont pas respectés, vous avez la possibilité d'introduire une réclamation auprès de la Commission Nationale de l'Informatique et des Libertés (CNIL) :<br><br>
-          CNIL — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07<br>
-          Téléphone : 01 53 73 22 22<br>
-          Site web : www.cnil.fr</p>
-    <h2>9. Cookies et technologies similaires</h2>
-    <p>L'Application n'utilise pas de cookies publicitaires ou de tracking tiers à des fins de profilage.</p>
-    <p>Nous utilisons uniquement des technologies strictement nécessaires au fonctionnement de l'Application :<br><br>
-          — Tokens d'authentification (stockage local sécurisé)<br>
-          — Préférences utilisateur (stockage local)<br>
-          — Données de session pour assurer la continuité du service</p>
-    <p>Ces technologies ne permettent aucun suivi publicitaire et ne collectent aucune donnée à des fins commerciales.</p>
-    <h2>10. Protection des mineurs</h2>
-    <p>L'Application est destinée aux personnes âgées d'au moins 16 ans.</p>
-    <p>Si vous avez moins de 16 ans, vous devez obtenir l'autorisation de votre représentant légal avant de créer un compte et d'utiliser l'Application.</p>
-    <p>Si nous avons connaissance qu'un utilisateur de moins de 16 ans a créé un compte sans autorisation parentale, nous procéderons à la suppression immédiate de ce compte et des données associées.</p>
-    <h2>11. Évolutions de la politique de confidentialité</h2>
-    <p>La présente Politique de Confidentialité peut être modifiée à tout moment pour refléter les évolutions de l'Application, de la législation applicable ou de nos pratiques de traitement des données.</p>
-    <p>Toute modification substantielle vous sera notifiée par e-mail ou via une notification dans l'Application au moins 30 jours avant son entrée en vigueur.</p>
-    <p>La date de dernière mise à jour figure en haut de ce document. Nous vous encourageons à consulter régulièrement cette page pour rester informé.</p>
-    <h2>12. Contact et délégué à la protection des données</h2>
-    <p>Pour toute question concernant cette Politique de Confidentialité ou l'exercice de vos droits, vous pouvez contacter l'Éditeur à l'adresse suivante :</p>
-    <p>E-mail : contact@beatitube.com<br>
-          Responsable du traitement : BeatItube<br>
-          Adresse postale : Rennes, France</p>
-    <p>À ce jour, compte tenu de la taille de notre structure, nous n'avons pas désigné de Délégué à la Protection des Données (DPO). Toute question relative à la protection de vos données peut être adressée directement à l'Éditeur.</p>
-    <h2>13. Mentions légales</h2>
-    <p>Éditeur : BeatItube<br>
-          Siège social : Rennes, France<br>
-          Contact : contact@beatitube.com<br>
-          Hébergement : Supabase Inc., 970 Toa Payoh North, Singapore<br>
-          Directeur de publication : BeatItube</p>
-    <p>Pour toute demande officielle, judiciaire ou administrative :<br>
-          legal@beatitube.com</p>
+    <p class="doc-meta lang-fr">Date d'entrée en vigueur : 20 mars 2026 — Version 1.0</p>
+    <p class="doc-meta lang-en">Effective date: March 20, 2026 — Version 1.0</p>
+
+    <!-- ==================== FRENCH ==================== -->
+    <div class="lang-fr">
+      <h2>Préambule</h2>
+      <p>La présente Politique de Confidentialité décrit comment vos données personnelles sont collectées, utilisées, partagées et protégées lorsque vous utilisez l'application mobile Beat (ci-après « l'Application »).</p>
+      <p>Beat est édité par BeatItube, projet indépendant basé à Rennes, France (ci-après « l'Éditeur » ou « nous »). L'Éditeur agit en qualité de responsable du traitement de vos données personnelles.</p>
+      <p>Nous nous engageons à respecter votre vie privée et à protéger vos données personnelles conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés.</p>
+
+      <h2>1. Données personnelles collectées</h2>
+      <p>Dans le cadre de votre utilisation de l'Application, nous collectons les catégories de données personnelles suivantes :</p>
+      <h3>1.1 Données de compte</h3>
+      <p>— Adresse e-mail<br>— Nom d'utilisateur (handle)<br>— Mot de passe (chiffré, jamais stocké en clair)<br>— Avatar / photo de profil<br>— Date de création du compte<br>— Méthode d'authentification (email/mot de passe, Google, Apple)</p>
+      <h3>1.2 Données de préférences musicales</h3>
+      <p>— Genres musicaux sélectionnés<br>— Préférences de filtrage du feed (cadran : Profil/Filtre1/Filtre2/Setup)<br>— Historique de « pushes » (promotions de contenus)<br>— Historique d'écoutes</p>
+      <h3>1.3 Contenus publiés</h3>
+      <p>— Fichiers audio (extraits musicaux de 60 secondes maximum)<br>— Métadonnées des contenus (titre, description, paroles, tags, plateformes musicales)<br>— Commentaires et interactions</p>
+      <h3>1.4 Données d'interactions sociales</h3>
+      <p>— Liste des comptes suivis et abonnés<br>— Historique de pushes donnés et reçus<br>— Commentaires publiés<br>— Signalements effectués</p>
+      <h3>1.5 Données techniques et de connexion</h3>
+      <p>— Type d'appareil (iOS/Android)<br>— Version du système d'exploitation<br>— Version de l'Application<br>— Adresse IP<br>— Logs de connexion (date et heure)<br>— Données de crash et d'erreurs techniques</p>
+
+      <h2>2. Finalités du traitement</h2>
+      <h3>2.1 Fourniture et gestion du service</h3>
+      <p>— Création et gestion de votre compte utilisateur<br>— Authentification et contrôle d'accès<br>— Fourniture des fonctionnalités de l'Application (feed, push, recherche, profil)<br>— Personnalisation de l'expérience utilisateur</p>
+      <h3>2.2 Communication</h3>
+      <p>— Notifications relatives à l'activité de votre compte<br>— Communications transactionnelles (confirmation d'inscription, réinitialisation de mot de passe)<br>— Informations importantes concernant les évolutions de l'Application</p>
+      <h3>2.3 Amélioration et développement du service</h3>
+      <p>— Analyse statistique anonymisée<br>— Détection et correction de bugs<br>— Développement de nouvelles fonctionnalités</p>
+      <h3>2.4 Sécurité et modération</h3>
+      <p>— Prévention de la fraude et des abus<br>— Détection de comportements malveillants (spam, bots)<br>— Modération des contenus signalés</p>
+      <h3>2.5 Obligations légales</h3>
+      <p>— Réponse aux obligations légales et réquisitions des autorités compétentes<br>— Conservation de données pour respect des durées légales</p>
+
+      <h2>3. Base juridique du traitement</h2>
+      <p>— Exécution du contrat (CGU) : traitement nécessaire à la fourniture du service<br>— Intérêt légitime de l'Éditeur : amélioration du service, sécurité, prévention de la fraude<br>— Consentement : pour les communications marketing (si activées à l'avenir)<br>— Obligations légales : conservation de données pour conformité juridique</p>
+
+      <h2>4. Destinataires des données</h2>
+      <h3>4.1 Hébergement et infrastructure</h3>
+      <p>— Supabase (infrastructure backend et base de données)<br>Localisation : États-Unis et Union Européenne<br>Certifications : SOC 2, conforme RGPD</p>
+      <h3>4.2 Stockage de fichiers</h3>
+      <p>— Supabase Storage (fichiers audio, images)</p>
+      <h3>4.3 Authentification tierce</h3>
+      <p>— Google Sign-In / Apple Sign-In (si utilisés)<br>Données partagées : nom, adresse e-mail, identifiant unique</p>
+      <h3>4.4 Engagement de non-vente des données</h3>
+      <p>L'Éditeur s'engage formellement à ne pas vendre, louer ou céder vos données personnelles à des tiers à des fins commerciales ou publicitaires.</p>
+      <h3>4.5 Absence de partage avec des tiers non essentiels</h3>
+      <p>Aucune donnée personnelle n'est partagée avec des régies publicitaires, des courtiers en données, des plateformes de ciblage publicitaire ou tout autre tiers à des fins de profilage, marketing ou monétisation.</p>
+
+      <h2>5. Transferts de données hors UE</h2>
+      <p>Certaines données peuvent être hébergées hors UE (Supabase, États-Unis). Ces transferts sont encadrés par des clauses contractuelles types et des certifications SOC 2.</p>
+
+      <h2>6. Durée de conservation</h2>
+      <h3>6.1 Données de compte actif</h3>
+      <p>— Profil et préférences : conservés pendant toute la durée d'utilisation<br>— Contenus publiés : conservés tant que non supprimés</p>
+      <h3>6.2 Après suppression du compte</h3>
+      <p>— Suppression complète dans un délai de 30 jours<br>— Conservation de certaines données pour obligations légales (1 an pour les logs)</p>
+      <h3>6.3 Données techniques</h3>
+      <p>— Logs de connexion : 12 mois maximum<br>— Données de crash : 6 mois maximum</p>
+
+      <h2>7. Sécurité des données</h2>
+      <h3>7.1 Mesures techniques</h3>
+      <p>— Chiffrement des données sensibles<br>— Protocoles HTTPS/TLS<br>— Infrastructure SOC 2 (Supabase)<br>— Sauvegardes régulières et chiffrées</p>
+      <h3>7.2 Mesures organisationnelles</h3>
+      <p>— Accès restreint (moindre privilège)<br>— Procédures de gestion des incidents<br>— Audits réguliers de sécurité</p>
+      <h3>7.3 Notification en cas de violation</h3>
+      <p>— Notification CNIL dans les 72 heures<br>— Information directe des utilisateurs concernés<br>— Mesures correctives immédiates</p>
+
+      <h2>8. Vos droits</h2>
+      <h3>8.1 Droit d'accès</h3>
+      <p>Vous pouvez obtenir confirmation du traitement de vos données et en demander une copie.</p>
+      <h3>8.2 Droit de rectification</h3>
+      <p>Vous pouvez demander la rectification de données inexactes. Certaines sont modifiables directement dans l'app.</p>
+      <h3>8.3 Droit à l'effacement</h3>
+      <p>La suppression de votre compte entraîne l'effacement définitif de vos données dans un délai de 30 jours.</p>
+      <h3>8.4 Droit à la portabilité</h3>
+      <p>Vous pouvez demander vos données dans un format structuré et lisible par machine.</p>
+      <h3>8.5 Droit à la limitation</h3>
+      <p>Vous pouvez demander la limitation du traitement dans certaines circonstances.</p>
+      <h3>8.6 Droit d'opposition</h3>
+      <p>Vous pouvez vous opposer au traitement fondé sur l'intérêt légitime.</p>
+      <h3>8.7 Retrait du consentement</h3>
+      <p>Vous pouvez retirer votre consentement à tout moment sans affecter la licéité du traitement antérieur.</p>
+      <h3>8.8 Exercice de vos droits</h3>
+      <p>Contact : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e4d41405a4f4d5a6e4c4b4f5a475a5b4c4b004d4143">[email&#160;protected]</a> — Délai de réponse : 1 mois.</p>
+      <h3>8.9 Réclamation CNIL</h3>
+      <p>CNIL — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07<br>Téléphone : 01 53 73 22 22 — www.cnil.fr</p>
+
+      <h2>9. Cookies et technologies similaires</h2>
+      <p>L'Application n'utilise pas de cookies publicitaires ou de tracking. Seules les technologies strictement nécessaires sont utilisées (tokens d'authentification, préférences locales, données de session).</p>
+
+      <h2>10. Protection des mineurs</h2>
+      <p>L'Application est destinée aux personnes âgées d'au moins 16 ans. Les comptes de mineurs sans autorisation parentale seront supprimés.</p>
+
+      <h2>11. Évolutions</h2>
+      <p>Cette politique peut être modifiée. Toute modification substantielle sera notifiée au moins 30 jours avant son entrée en vigueur.</p>
+
+      <h2>12. Contact</h2>
+      <p>E-mail : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0b3bfbea4b1b3a490b2b5b1a4b9a4a5b2b5feb3bfbd">[email&#160;protected]</a><br>Responsable du traitement : BeatItube — Rennes, France</p>
+      <p>Pour toute demande officielle : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a4adafa9a488aaada9bca1bcbdaaade6aba7a5">[email&#160;protected]</a></p>
+    </div>
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="lang-en">
+      <h2>Preamble</h2>
+      <p>This Privacy Policy describes how your personal data is collected, used, shared and protected when you use the Beat mobile application (hereinafter "the App").</p>
+      <p>Beat is published by BeatItube, an independent project based in Rennes, France (hereinafter "the Publisher" or "we"). The Publisher acts as the data controller for your personal data.</p>
+      <p>We are committed to respecting your privacy and protecting your personal data in accordance with the General Data Protection Regulation (GDPR) and French data protection law.</p>
+
+      <h2>1. Personal data collected</h2>
+      <p>In the course of your use of the App, we collect the following categories of personal data:</p>
+      <h3>1.1 Account data</h3>
+      <p>— Email address<br>— Username (handle)<br>— Password (encrypted, never stored in plain text)<br>— Avatar / profile picture<br>— Account creation date<br>— Authentication method (email/password, Google, Apple)</p>
+      <h3>1.2 Music preference data</h3>
+      <p>— Selected music genres<br>— Feed filter preferences (dial: Profile/Filter1/Filter2/Setup)<br>— Push history (content promotions)<br>— Listening history</p>
+      <h3>1.3 Published content</h3>
+      <p>— Audio files (music clips up to 60 seconds)<br>— Content metadata (title, description, lyrics, tags, music platforms)<br>— Comments and interactions</p>
+      <h3>1.4 Social interaction data</h3>
+      <p>— List of followed accounts and followers<br>— Push history (given and received)<br>— Published comments<br>— Reports filed</p>
+      <h3>1.5 Technical and connection data</h3>
+      <p>— Device type (iOS/Android)<br>— Operating system version<br>— App version<br>— IP address<br>— Connection logs (date and time)<br>— Crash and error data</p>
+
+      <h2>2. Processing purposes</h2>
+      <h3>2.1 Service provision and management</h3>
+      <p>— User account creation and management<br>— Authentication and access control<br>— Provision of App features (feed, push, search, profile)<br>— User experience personalization</p>
+      <h3>2.2 Communication</h3>
+      <p>— Notifications related to account activity<br>— Transactional communications (registration confirmation, password reset)<br>— Important information regarding App changes</p>
+      <h3>2.3 Service improvement and development</h3>
+      <p>— Anonymized statistical analysis<br>— Bug detection and fixes<br>— New feature development</p>
+      <h3>2.4 Security and moderation</h3>
+      <p>— Fraud and abuse prevention<br>— Malicious behavior detection (spam, bots)<br>— Reported content moderation</p>
+      <h3>2.5 Legal obligations</h3>
+      <p>— Compliance with legal obligations and authority requests<br>— Data retention for legal compliance</p>
+
+      <h2>3. Legal basis for processing</h2>
+      <p>— Contract performance (Terms): processing necessary to provide the service<br>— Legitimate interest: service improvement, security, fraud prevention<br>— Consent: for marketing communications (if enabled in the future)<br>— Legal obligations: data retention for legal compliance</p>
+
+      <h2>4. Data recipients</h2>
+      <h3>4.1 Hosting and infrastructure</h3>
+      <p>— Supabase (backend infrastructure and database)<br>Location: United States and European Union<br>Certifications: SOC 2, GDPR compliant</p>
+      <h3>4.2 File storage</h3>
+      <p>— Supabase Storage (audio files, images)</p>
+      <h3>4.3 Third-party authentication</h3>
+      <p>— Google Sign-In / Apple Sign-In (if used)<br>Shared data: name, email address, unique identifier</p>
+      <h3>4.4 Commitment not to sell data</h3>
+      <p>The Publisher formally commits not to sell, rent or transfer your personal data to third parties for commercial or advertising purposes.</p>
+      <h3>4.5 No sharing with non-essential third parties</h3>
+      <p>No personal data is shared with advertising networks, data brokers, ad targeting platforms or any other third party for profiling, marketing or monetization purposes.</p>
+
+      <h2>5. Data transfers outside the EU</h2>
+      <p>Some data may be hosted outside the EU (Supabase, United States). These transfers are governed by standard contractual clauses and SOC 2 certifications.</p>
+
+      <h2>6. Data retention</h2>
+      <h3>6.1 Active account data</h3>
+      <p>— Profile and preferences: retained throughout use<br>— Published content: retained until manually deleted</p>
+      <h3>6.2 After account deletion</h3>
+      <p>— Complete deletion within 30 days<br>— Certain data retained for legal obligations (1 year for connection logs)</p>
+      <h3>6.3 Technical data</h3>
+      <p>— Connection logs: 12 months maximum<br>— Crash data: 6 months maximum</p>
+
+      <h2>7. Data security</h2>
+      <h3>7.1 Technical measures</h3>
+      <p>— Encryption of sensitive data<br>— HTTPS/TLS protocols<br>— SOC 2 infrastructure (Supabase)<br>— Regular encrypted backups</p>
+      <h3>7.2 Organizational measures</h3>
+      <p>— Restricted access (least privilege)<br>— Incident management procedures<br>— Regular security audits</p>
+      <h3>7.3 Breach notification</h3>
+      <p>— CNIL notification within 72 hours<br>— Direct notification to affected users<br>— Immediate corrective measures</p>
+
+      <h2>8. Your rights</h2>
+      <h3>8.1 Right of access</h3>
+      <p>You can obtain confirmation that your data is being processed and request a copy.</p>
+      <h3>8.2 Right to rectification</h3>
+      <p>You can request correction of inaccurate data. Some data can be modified directly in the app.</p>
+      <h3>8.3 Right to erasure</h3>
+      <p>Deleting your account results in definitive erasure of your data within 30 days.</p>
+      <h3>8.4 Right to data portability</h3>
+      <p>You can request your data in a structured, machine-readable format.</p>
+      <h3>8.5 Right to restriction</h3>
+      <p>You can request restriction of processing in certain circumstances.</p>
+      <h3>8.6 Right to object</h3>
+      <p>You can object to processing based on legitimate interest.</p>
+      <h3>8.7 Withdrawal of consent</h3>
+      <p>You can withdraw your consent at any time without affecting the lawfulness of prior processing.</p>
+      <h3>8.8 Exercising your rights</h3>
+      <p>Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066569687267657246646367726f727364632865696b">[email&#160;protected]</a> — Response time: 1 month.</p>
+      <h3>8.9 CNIL complaint</h3>
+      <p>CNIL — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07<br>Phone: 01 53 73 22 22 — www.cnil.fr</p>
+
+      <h2>9. Cookies and similar technologies</h2>
+      <p>The App does not use advertising cookies or tracking. Only strictly necessary technologies are used (authentication tokens, local preferences, session data).</p>
+
+      <h2>10. Protection of minors</h2>
+      <p>The App is intended for persons aged 16 or over. Accounts of minors without parental authorization will be deleted.</p>
+
+      <h2>11. Changes</h2>
+      <p>This policy may be modified. Any substantial change will be notified at least 30 days before taking effect.</p>
+
+      <h2>12. Contact</h2>
+      <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f5969a9b81949681b5979094819c81809790db969a98">[email&#160;protected]</a><br>Data controller: BeatItube — Rennes, France</p>
+      <p>For official requests: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4a8a1a3a5a884a6a1a5b0adb0b1a6a1eaa7aba9">[email&#160;protected]</a></p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      <a href="/cgu" class="lang-fr">CGU</a>
+      <a href="/cgu" class="lang-en">Terms</a>
+      <a href="/copyright">Copyright</a>
+      <a href="/mentions-legales" class="lang-fr">Mentions légales</a>
+      <a href="/mentions-legales" class="lang-en">Legal notice</a>
+      <a href="/">Beat</a>
+    </div>
   </div>
-</body>
-</html>
+
+  <script

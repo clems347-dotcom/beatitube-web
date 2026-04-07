@@ -4,90 +4,148 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signalement Copyright — Beat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root { --red: #FF4444; --dark: #0b0b0b; --text: #ccc; --text-dim: #888; --text-faint: #555; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0b0b0b; color: #ccc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; padding: 40px 20px; }
+    body { background: var(--dark); color: var(--text); font-family: 'Outfit', sans-serif; line-height: 1.7; padding: 40px 20px; }
     .container { max-width: 680px; margin: 0 auto; }
+    .lang-fr, .lang-en { display: none; }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+    .back { display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); text-decoration:none; font-size:13px; font-weight:400; transition:color .2s; letter-spacing:0.5px; }
+    .back:hover { color:var(--text); }
+    .lang-switch { display:flex; gap:4px; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; }
+    .lang-switch button { background:none; border:none; color:var(--text-faint); font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; padding:4px 10px; border-radius:6px; cursor:pointer; transition:all .2s; }
+    .lang-switch button.active { background:var(--red); color:#fff; }
+    .lang-switch button:hover:not(.active) { color:var(--text-dim); }
     h1 { color: #fff; font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-    h1 span { color: #FF4444; }
-    .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+    h1 span { color: var(--red); }
+    .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
     h2 { color: #fff; font-size: 18px; font-weight: 700; margin: 28px 0 12px; }
     p, li { font-size: 14px; margin-bottom: 12px; }
     ul { padding-left: 20px; }
     li { margin-bottom: 8px; }
-    .highlight { background: #1a1a1a; border-radius: 12px; padding: 20px; margin: 20px 0; border-left: 3px solid #FF4444; }
+    .highlight { background: #1a1a1a; border-radius: 12px; padding: 20px; margin: 20px 0; border-left: 3px solid var(--red); }
     .highlight p { margin-bottom: 8px; }
-    .email-link { color: #FF4444; text-decoration: none; font-weight: 700; }
+    .email-link { color: var(--red); text-decoration: none; font-weight: 700; }
     .email-link:hover { text-decoration: underline; }
     .timeline { display: flex; gap: 12px; margin: 20px 0; }
     .timeline-step { flex: 1; background: #1a1a1a; border-radius: 12px; padding: 16px; text-align: center; }
-    .timeline-step .number { color: #FF4444; font-size: 24px; font-weight: 800; }
+    .timeline-step .number { color: var(--red); font-size: 24px; font-weight: 800; }
     .timeline-step .label { color: #fff; font-size: 13px; font-weight: 600; margin-top: 4px; }
-    .timeline-step .desc { color: #888; font-size: 11px; margin-top: 4px; }
-    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #222; color: #555; font-size: 12px; }
-    .footer a { color: #FF4444; text-decoration: none; }
+    .timeline-step .desc { color: var(--text-dim); font-size: 11px; margin-top: 4px; }
+    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #222; }
+    .footer a { color: var(--text-faint); text-decoration: none; font-size: 13px; margin-right: 16px; }
+    .footer a:hover { color: var(--text-dim); }
     @media (max-width: 500px) { .timeline { flex-direction: column; } }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1><span>Beat</span> — Signalement Copyright</h1>
-    <p class="subtitle">Procédure de retrait de contenu protégé par le droit d'auteur</p>
-
-    <h2>Notre engagement</h2>
-    <p>Beat respecte la propriété intellectuelle. Si vous êtes titulaire de droits d'auteur et pensez qu'un contenu publié sur Beat enfreint vos droits, nous nous engageons à traiter votre demande sous 48 heures.</p>
-
-    <h2>Procédure de signalement</h2>
-    <div class="timeline">
-      <div class="timeline-step">
-        <div class="number">1</div>
-        <div class="label">Signaler</div>
-        <div class="desc">Email à legal@beatitube.com</div>
-      </div>
-      <div class="timeline-step">
-        <div class="number">2</div>
-        <div class="label">Examen</div>
-        <div class="desc">Vérification sous 48h</div>
-      </div>
-      <div class="timeline-step">
-        <div class="number">3</div>
-        <div class="label">Action</div>
-        <div class="desc">Retrait ou contestation</div>
+    <div class="top-bar">
+      <a href="/" class="back">← <span class="lang-fr">Retour</span><span class="lang-en">Back</span></a>
+      <div class="lang-switch">
+        <button onclick="setLang('fr')" id="btn-fr">FR</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
       </div>
     </div>
 
-    <h2>Que doit contenir votre demande</h2>
-    <p>Pour que nous puissions traiter votre signalement, merci d'envoyer un email à <a href="mailto:legal@beatitube.com" class="email-link">legal@beatitube.com</a> avec les informations suivantes :</p>
-    <ul>
-      <li><strong>Identification de l'œuvre protégée</strong> — titre, artiste, lien vers l'œuvre originale (Spotify, YouTube, etc.)</li>
-      <li><strong>Identification du contenu litigieux sur Beat</strong> — lien vers la track ou nom de l'artiste sur Beat</li>
-      <li><strong>Vos coordonnées</strong> — nom, prénom, email, et votre qualité (auteur, éditeur, label, ayant droit)</li>
-      <li><strong>Déclaration de bonne foi</strong> — confirmation que vous êtes le titulaire des droits ou son représentant autorisé</li>
-    </ul>
+    <!-- ==================== FRENCH ==================== -->
+    <div class="lang-fr">
+      <h1><span>Beat</span> — Signalement Copyright</h1>
+      <p class="subtitle">Procédure de retrait de contenu protégé par le droit d'auteur</p>
 
-    <div class="highlight">
-      <p><strong>Contact :</strong> <a href="mailto:legal@beatitube.com" class="email-link">legal@beatitube.com</a></p>
-      <p><strong>Délai de traitement :</strong> 48 heures maximum</p>
-      <p><strong>Éditeur :</strong> Beatitube — Rennes, France</p>
+      <h2>Notre engagement</h2>
+      <p>Beat respecte la propriété intellectuelle. Si vous êtes titulaire de droits d'auteur et pensez qu'un contenu publié sur Beat enfreint vos droits, nous nous engageons à traiter votre demande sous 48 heures.</p>
+
+      <h2>Procédure de signalement</h2>
+      <div class="timeline">
+        <div class="timeline-step"><div class="number">1</div><div class="label">Signaler</div><div class="desc">Email à <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167a7371777a56747377627f626374733875797b">[email&#160;protected]</a></div></div>
+        <div class="timeline-step"><div class="number">2</div><div class="label">Examen</div><div class="desc">Vérification sous 48h</div></div>
+        <div class="timeline-step"><div class="number">3</div><div class="label">Action</div><div class="desc">Retrait ou contestation</div></div>
+      </div>
+
+      <h2>Que doit contenir votre demande</h2>
+      <p>Envoyez un email à <a href="/cdn-cgi/l/email-protection#ef838a888e83af8d8a8e9b869b9a8d8ac18c8082" class="email-link"><span class="__cf_email__" data-cfemail="d6bab3b1b7ba96b4b3b7a2bfa2a3b4b3f8b5b9bb">[email&#160;protected]</span></a> avec :</p>
+      <ul>
+        <li><strong>Identification de l'œuvre protégée</strong> — titre, artiste, lien vers l'œuvre originale (Spotify, YouTube, etc.)</li>
+        <li><strong>Identification du contenu litigieux sur Beat</strong> — lien vers la track ou nom de l'artiste sur Beat</li>
+        <li><strong>Vos coordonnées</strong> — nom, prénom, email, et votre qualité (auteur, éditeur, label, ayant droit)</li>
+        <li><strong>Déclaration de bonne foi</strong> — confirmation que vous êtes le titulaire des droits ou son représentant autorisé</li>
+      </ul>
+
+      <div class="highlight">
+        <p><strong>Contact :</strong> <a href="/cdn-cgi/l/email-protection#cba7aeacaaa78ba9aeaabfa2bfbea9aee5a8a4a6" class="email-link"><span class="__cf_email__" data-cfemail="e28e8785838ea2808783968b96978087cc818d8f">[email&#160;protected]</span></a></p>
+        <p><strong>Délai de traitement :</strong> 48 heures maximum</p>
+        <p><strong>Éditeur :</strong> Beatitube — Rennes, France</p>
+      </div>
+
+      <h2>Que se passe-t-il ensuite</h2>
+      <ul>
+        <li>Le contenu est retiré ou masqué dans les 48h suivant réception d'un signalement valide.</li>
+        <li>L'utilisateur ayant publié le contenu est notifié du retrait et du motif.</li>
+        <li>En cas de récidive, le compte peut être suspendu.</li>
+        <li>L'utilisateur peut contester le retrait en apportant la preuve de ses droits.</li>
+      </ul>
+
+      <h2>Signalement depuis l'application</h2>
+      <p>Vous pouvez également signaler une track directement dans l'app Beat en utilisant le bouton de signalement (drapeau) disponible sur chaque track. Sélectionnez le motif "Copyright" et ajoutez les détails nécessaires.</p>
+
+      <h2>Abus de signalement</h2>
+      <p>Les signalements abusifs ou de mauvaise foi sont passibles de suspension du compte du signaleur. Cette procédure est réservée aux titulaires légitimes de droits d'auteur.</p>
     </div>
 
-    <h2>Que se passe-t-il ensuite</h2>
-    <ul>
-      <li>Le contenu est retiré ou masqué dans les 48h suivant réception d'un signalement valide.</li>
-      <li>L'utilisateur ayant publié le contenu est notifié du retrait et du motif.</li>
-      <li>En cas de récidive, le compte peut être suspendu.</li>
-      <li>L'utilisateur peut contester le retrait en apportant la preuve de ses droits.</li>
-    </ul>
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="lang-en">
+      <h1><span>Beat</span> — Copyright Report</h1>
+      <p class="subtitle">Procedure for removing copyright-protected content</p>
 
-    <h2>Signalement depuis l'application</h2>
-    <p>Vous pouvez également signaler une track directement dans l'app Beat en utilisant le bouton de signalement (drapeau) disponible sur chaque track. Sélectionnez le motif "Copyright" et ajoutez les détails nécessaires.</p>
+      <h2>Our commitment</h2>
+      <p>Beat respects intellectual property. If you are a copyright holder and believe that content published on Beat infringes your rights, we commit to processing your request within 48 hours.</p>
 
-    <h2>Abus de signalement</h2>
-    <p>Les signalements abusifs ou de mauvaise foi sont passibles de suspension du compte du signaleur. Cette procédure est réservée aux titulaires légitimes de droits d'auteur.</p>
+      <h2>Reporting procedure</h2>
+      <div class="timeline">
+        <div class="timeline-step"><div class="number">1</div><div class="label">Report</div><div class="desc">Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274b4240464b67454246534e535245420944484a">[email&#160;protected]</a></div></div>
+        <div class="timeline-step"><div class="number">2</div><div class="label">Review</div><div class="desc">Verification within 48h</div></div>
+        <div class="timeline-step"><div class="number">3</div><div class="label">Action</div><div class="desc">Removal or dispute</div></div>
+      </div>
 
+      <h2>What your request must include</h2>
+      <p>Send an email to <a href="/cdn-cgi/l/email-protection#aac6cfcdcbc6eac8cfcbdec3dedfc8cf84c9c5c7" class="email-link"><span class="__cf_email__" data-cfemail="5e323b393f321e3c3b3f2a372a2b3c3b703d3133">[email&#160;protected]</span></a> with:</p>
+      <ul>
+        <li><strong>Identification of the protected work</strong> — title, artist, link to the original work (Spotify, YouTube, etc.)</li>
+        <li><strong>Identification of the infringing content on Beat</strong> — link to the track or artist name on Beat</li>
+        <li><strong>Your contact details</strong> — name, email, and your capacity (author, publisher, label, rights holder)</li>
+        <li><strong>Good faith declaration</strong> — confirmation that you are the rights holder or their authorized representative</li>
+      </ul>
+
+      <div class="highlight">
+        <p><strong>Contact:</strong> <a href="/cdn-cgi/l/email-protection#3a565f5d5b567a585f5b4e534e4f585f14595557" class="email-link"><span class="__cf_email__" data-cfemail="b6dad3d1d7daf6d4d3d7c2dfc2c3d4d398d5d9db">[email&#160;protected]</span></a></p>
+        <p><strong>Processing time:</strong> 48 hours maximum</p>
+        <p><strong>Publisher:</strong> Beatitube — Rennes, France</p>
+      </div>
+
+      <h2>What happens next</h2>
+      <ul>
+        <li>The content is removed or hidden within 48 hours of receiving a valid report.</li>
+        <li>The user who published the content is notified of the removal and the reason.</li>
+        <li>In case of repeated offenses, the account may be suspended.</li>
+        <li>The user may dispute the removal by providing proof of their rights.</li>
+      </ul>
+
+      <h2>Reporting from the app</h2>
+      <p>You can also report a track directly in the Beat app using the report button (flag) available on each track. Select the "Copyright" reason and add the necessary details.</p>
+
+      <h2>Abusive reporting</h2>
+      <p>Abusive or bad faith reports may result in suspension of the reporter's account. This procedure is reserved for legitimate copyright holders.</p>
+    </div>
+
+    <!-- FOOTER -->
     <div class="footer">
-      <p>&copy; 2026 Beatitube — <a href="/cgu">CGU</a> · <a href="/privacy-policy">Politique de confidentialité</a> · <a href="/">Accueil</a></p>
-    </div>
-  </div>
-</body>
-</html>
+      <a href="/cgu" class="lang-fr">CGU</a>
+      <a href="/cgu" class="lang-en">Terms</a>
+      <a href="/privacy" class="lang-fr">Confidentialité</a>
+      <a href="/privacy" class="lang-en">Privacy</a>
+      <a href="/mentions-legales" class="lang-fr">Mentions légales</a>
+      <a href="/mentions-legales" class="lang-en">Legal notice</a>
+      <a href

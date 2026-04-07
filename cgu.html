@@ -11,113 +11,237 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Outfit',sans-serif; background:var(--dark); color:var(--text); }
     .container { max-width:700px; margin:0 auto; padding:80px 24px 60px; }
-    .back {
-      display:inline-flex; align-items:center; gap:6px;
-      color:var(--text-dim); text-decoration:none; font-size:13px;
-      font-weight:400; margin-bottom:32px; transition:color .2s;
-      letter-spacing:0.5px;
-    }
+    .lang-fr, .lang-en { display: none; }
+    .back { display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); text-decoration:none; font-size:13px; font-weight:400; margin-bottom:32px; transition:color .2s; letter-spacing:0.5px; }
     .back:hover { color:var(--text); }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+    .lang-switch { display:flex; gap:4px; background:rgba(255,255,255,0.06); border-radius:8px; padding:2px; }
+    .lang-switch button { background:none; border:none; color:var(--text-faint); font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; padding:4px 10px; border-radius:6px; cursor:pointer; transition:all .2s; }
+    .lang-switch button.active { background:var(--red); color:#fff; }
+    .lang-switch button:hover:not(.active) { color:var(--text-dim); }
     h1 { font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:-0.5px; }
     .doc-subtitle { font-size:15px; color:var(--text-dim); font-weight:400; }
     .doc-meta { font-size:12px; color:var(--text-faint); margin-bottom:36px; margin-top:4px; }
     h2 { font-size:18px; font-weight:700; color:var(--red); margin:28px 0 10px; }
     h3 { font-size:15px; font-weight:600; color:var(--text); margin:16px 0 6px; }
     p { font-size:14px; font-weight:300; color:var(--text-dim); line-height:1.75; margin-bottom:10px; }
-    .bullet { padding-left:16px; position:relative; }
-    .bullet::before { content:"·"; position:absolute; left:4px; color:var(--red); font-weight:700; }
-    .doc-footer { margin-top:32px; font-size:13px; color:var(--text-faint); font-style:italic; }
     a { color:var(--red); text-decoration:none; }
     a:hover { text-decoration:underline; }
+    .doc-footer { margin-top:40px; padding-top:20px; border-top:1px solid #222; }
+    .doc-footer a { color:var(--text-faint); font-size:13px; margin-right:16px; }
+    .doc-footer a:hover { color:var(--text-dim); }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="/" class="back">← Retour</a>
+    <div class="top-bar">
+      <a href="/" class="back">← <span class="lang-fr">Retour</span><span class="lang-en">Back</span></a>
+      <div class="lang-switch">
+        <button onclick="setLang('fr')" id="btn-fr">FR</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
+    </div>
+
     <p class="doc-subtitle">Application Beat</p>
-    <p class="doc-meta">Date d'entrée en vigueur : 20 mars 2026 — Version 1.0</p>
-    <h2>Préambule</h2>
-    <p>Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») régissent l'accès et l'utilisation de l'application mobile Beat (ci-après « l'Application »), éditée par BeatItube, projet indépendant basé à Rennes, France (ci-après « l'Éditeur »).</p>
-    <p>L'Application est un projet indépendant publié à titre personnel. Elle n'est adossée à aucune structure commerciale à la date de publication des présentes.</p>
-    <p>Beat est une plateforme de découverte et de partage de musique en format court, permettant aux utilisateurs de publier, écouter et promouvoir des extraits audio originaux. En utilisant l'Application, l'Utilisateur reconnaît avoir lu, compris et accepté les présentes CGU dans leur intégralité.</p>
-    <h2>Article 1 — Définitions</h2>
-    <p>« Utilisateur » désigne toute personne physique ayant créé un compte sur l'Application et ayant accepté les présentes CGU.<br><br>
-          « Contenu » désigne tout fichier audio, texte (paroles, descriptions), métadonnées, images (pochettes, avatars) ou toute autre donnée publiée par un Utilisateur sur l'Application.<br><br>
-          « Push » désigne l'action de promouvoir un Contenu dans le système de découverte communautaire de l'Application.<br><br>
-          « Services » désigne l'ensemble des fonctionnalités proposées par l'Application.</p>
-    <h2>Article 2 — Accès et inscription</h2>
-    <h3>2.1 Conditions d'inscription</h3>
-    <p>L'utilisation de l'Application nécessite la création d'un compte. L'Utilisateur doit être âgé d'au moins 16 ans, ou disposer de l'autorisation d'un représentant légal. L'Utilisateur s'engage à fournir des informations exactes et à les maintenir à jour.</p>
-    <h3>2.2 Identifiants</h3>
-    <p>L'Utilisateur est seul responsable de la confidentialité de ses identifiants de connexion. Toute activité réalisée depuis son compte est réputée effectuée par lui. En cas de suspicion d'utilisation non autorisée, l'Utilisateur doit en informer l'Éditeur sans délai.</p>
-    <h3>2.3 Disponibilité</h3>
-    <p>L'Éditeur s'efforce d'assurer la disponibilité de l'Application mais ne garantit pas un accès ininterrompu. Des interruptions pour maintenance ou mise à jour peuvent survenir sans préavis.</p>
-    <h2>Article 3 — Propriété intellectuelle et droits d'auteur</h2>
-    <h3>3.1 Propriété de l'Application</h3>
-    <p>L'Application, son architecture, son design, son code source, ses logos et tout élément graphique ou fonctionnel sont la propriété exclusive de l'Éditeur et sont protégés par le droit de la propriété intellectuelle français et international.</p>
-    <h3>3.2 Garantie de détention des droits par l'Utilisateur</h3>
-    <p>En publiant un Contenu sur l'Application, l'Utilisateur déclare et garantit :<br><br>
-          — Être l'auteur original du Contenu, ou détenir l'ensemble des droits, licences et autorisations nécessaires à sa publication et sa diffusion sur l'Application.<br><br>
-          — Que le Contenu ne porte pas atteinte aux droits de propriété intellectuelle de tiers, notamment aux droits d'auteur, droits voisins, droits d'éditeur ou de producteur.<br><br>
-          — Que si le Contenu est distribué sur des plateformes tierces (Spotify, Deezer, Apple Music, etc.), l'Utilisateur dispose des autorisations nécessaires de ses éventuels éditeurs, labels ou distributeurs pour le publier également sur Beat.<br><br>
-          — Assumer l'entière responsabilité en cas de réclamation d'un tiers relative aux droits de propriété intellectuelle sur le Contenu publié.</p>
-    <h3>3.3 Licence accordée à l'Éditeur</h3>
-    <p>En publiant un Contenu, l'Utilisateur accorde à l'Éditeur une licence non exclusive, mondiale, gratuite et pour la durée de publication du Contenu, lui permettant de reproduire, représenter, adapter et distribuer le Contenu dans le cadre du fonctionnement de l'Application et de sa promotion.<br><br>
-          L'Utilisateur conserve l'intégralité de ses droits de propriété intellectuelle sur son Contenu. Il peut retirer son Contenu à tout moment, ce qui met fin à la licence accordée, sous réserve d'un délai technique raisonnable de suppression.</p>
-    <h3>3.4 Signalement et retrait</h3>
-    <p>L'Éditeur met à disposition un système de signalement permettant à tout ayant droit de notifier une atteinte à ses droits de propriété intellectuelle. Conformément à la législation applicable, l'Éditeur procédera au retrait prompt du Contenu litigieux après réception d'une notification complète et conforme.</p>
-    <h3>3.5 Évolution du modèle de droits</h3>
-    <p>L'Éditeur se réserve la possibilité de conclure, à terme, des accords de licence avec des sociétés de gestion collective (SACEM, SCPP, SPPF, etc.) ou des éditeurs et labels, afin de permettre la diffusion légale d'œuvres protégées sur l'Application.</p>
-    <h2>Article 4 — Règles de conduite</h2>
-    <p>L'Utilisateur s'engage à utiliser l'Application de manière responsable et respectueuse. Sont notamment interdits :<br><br>
-          — La publication de contenus illicites, diffamatoires, injurieux, discriminatoires, violents, pornographiques ou incitant à la haine.<br><br>
-          — Le harcèlement, l'intimidation ou toute forme de comportement abusif envers d'autres Utilisateurs.<br><br>
-          — L'usurpation d'identité ou la création de faux comptes.<br><br>
-          — L'utilisation de bots, scripts ou tout moyen automatisé pour interagir avec l'Application.<br><br>
-          — Toute tentative d'accès non autorisé aux systèmes de l'Application.<br><br>
-          L'Éditeur se réserve le droit de modérer, suspendre ou supprimer tout Contenu ou compte ne respectant pas les présentes CGU, sans préavis ni indemnisation.</p>
-    <h2>Article 5 — Protection des données personnelles</h2>
-    <h3>5.1 Responsable du traitement</h3>
-    <p>Le responsable du traitement des données personnelles est BeatItube, en sa qualité d'éditeur de l'Application.</p>
-    <h3>5.2 Données collectées</h3>
-    <p>Dans le cadre de l'utilisation de l'Application, les données suivantes peuvent être collectées : adresse e-mail, nom d'utilisateur (handle), avatar, préférences musicales (genres, filtres), contenus publiés, interactions (pushes, commentaires), et données techniques (type d'appareil, version de l'OS, logs de connexion).</p>
-    <h3>5.3 Finalités du traitement</h3>
-    <p>Les données personnelles sont collectées et traitées pour : la création et gestion du compte, la fourniture et amélioration des Services, la communication avec l'Utilisateur, la sécurité et modération de la plateforme, et l'analyse statistique anonymisée.</p>
-    <h3>5.4 Engagement de non-vente des données</h3>
-    <p>L'Éditeur s'engage à ne pas vendre les données personnelles de ses Utilisateurs à des tiers. Les données ne sont pas monnaie d'échange : elles sont collectées uniquement dans l'intérêt de l'Utilisateur et pour le bon fonctionnement de l'Application.</p>
-    <h3>5.5 Partage limité des données</h3>
-    <p>Les données personnelles pourront être partagées uniquement avec des prestataires techniques nécessaires au fonctionnement de l'Application (hébergement Supabase), en cas d'obligation légale ou de réquisition judiciaire, ou dans le cadre d'une éventuelle création de structure juridique.</p>
-    <h3>5.6 Droits de l'Utilisateur</h3>
-    <p>Conformément au RGPD et à la loi Informatique et Libertés, l'Utilisateur dispose des droits suivants : accès, rectification, effacement (« droit à l'oubli »), portabilité, limitation du traitement, opposition, et retrait du consentement.<br><br>
-          Ces droits peuvent être exercés par e-mail à l'adresse : contact@beatitube.com. L'Éditeur s'engage à répondre dans un délai d'un mois. En cas de difficulté, l'Utilisateur peut introduire une réclamation auprès de la CNIL (www.cnil.fr).</p>
-    <h3>5.7 Durée de conservation</h3>
-    <p>Les données personnelles sont conservées pour la durée nécessaire aux finalités pour lesquelles elles ont été collectées, et conformément aux obligations légales applicables.</p>
-    <h3>5.8 Sécurité</h3>
-    <p>L'Éditeur met en œuvre les mesures techniques et organisationnelles appropriées pour protéger les données personnelles. Les données sont hébergées par Supabase (infrastructure cloud conforme aux standards de sécurité SOC 2).</p>
-    <h2>Article 6 — Gratuité et modèle économique</h2>
-    <p>L'utilisation de l'Application est gratuite. L'Éditeur se réserve le droit d'introduire à l'avenir des fonctionnalités payantes, des abonnements ou un système de crédits.<br><br>
-          L'Éditeur s'engage à ne pas intégrer de publicité ciblée basée sur le profilage des Utilisateurs sans leur consentement explicite et préalable.</p>
-    <h2>Article 7 — Limitation de responsabilité</h2>
-    <p>L'Application est fournie « en l'état ». L'Éditeur ne saurait être tenu responsable des dommages directs ou indirects résultant de l'utilisation de l'Application.<br><br>
-          L'Éditeur agit en qualité d'hébergeur au sens de la LCEN s'agissant des Contenus publiés par les Utilisateurs.</p>
-    <h2>Article 8 — Modération et signalement</h2>
-    <p>L'Application dispose d'un système de signalement accessible depuis chaque Contenu. L'Éditeur s'engage à examiner les signalements dans un délai raisonnable et à prendre les mesures nécessaires.</p>
-    <h2>Article 9 — Modification des CGU</h2>
-    <p>L'Éditeur se réserve le droit de modifier les présentes CGU à tout moment. Les modifications seront notifiées aux Utilisateurs. La poursuite de l'utilisation de l'Application après notification vaut acceptation des nouvelles CGU.</p>
-    <h2>Article 10 — Résiliation</h2>
-    <p>L'Utilisateur peut supprimer son compte à tout moment depuis les paramètres de l'Application. La suppression entraîne l'effacement de ses données personnelles et de ses Contenus dans un délai de 30 jours.</p>
-    <h2>Article 11 — Droit applicable et litiges</h2>
-    <p>Les présentes CGU sont régies par le droit français. En cas de litige, les parties s'engagent à rechercher une solution amiable. À défaut, le litige sera soumis aux tribunaux compétents de Rennes.</p>
-    <h2>Article 12 — Contact</h2>
-    <p>Pour toute question relative aux présentes CGU ou à l'exercice de vos droits, vous pouvez contacter l'Éditeur à l'adresse suivante : contact@beatitube.com</p>
-    <h2>Mentions légales</h2>
-    <p>Éditeur : BeatItube<br>
-          Siège social : Rennes, France<br>
-          Contact : contact@beatitube.com<br>
-          Hébergement : Supabase Inc., 970 Toa Payoh North, Singapore<br>
-          Directeur de publication : BeatItube</p>
-    <p>Pour toute demande officielle, judiciaire ou administrative :<br>
-          legal@beatitube.com</p>
+    <p class="doc-meta lang-fr">Date d'entrée en vigueur : 20 mars 2026 — Version 1.0</p>
+    <p class="doc-meta lang-en">Effective date: March 20, 2026 — Version 1.0</p>
+
+    <!-- ==================== FRENCH ==================== -->
+    <div class="lang-fr">
+      <h2>Préambule</h2>
+      <p>Les présentes Conditions Générales d'Utilisation (ci-après « CGU ») régissent l'accès et l'utilisation de l'application mobile Beat (ci-après « l'Application »), éditée par BeatItube, projet indépendant basé à Rennes, France (ci-après « l'Éditeur »).</p>
+      <p>L'Application est un projet indépendant publié à titre personnel. Elle n'est adossée à aucune structure commerciale à la date de publication des présentes.</p>
+      <p>Beat est une plateforme de découverte et de partage de musique en format court, permettant aux utilisateurs de publier, écouter et promouvoir des extraits audio originaux. En utilisant l'Application, l'Utilisateur reconnaît avoir lu, compris et accepté les présentes CGU dans leur intégralité.</p>
+
+      <h2>Article 1 — Définitions</h2>
+      <p>« Utilisateur » désigne toute personne physique ayant créé un compte sur l'Application et ayant accepté les présentes CGU.<br><br>
+      « Contenu » désigne tout fichier audio, texte (paroles, descriptions), métadonnées, images (pochettes, avatars) ou toute autre donnée publiée par un Utilisateur sur l'Application.<br><br>
+      « Push » désigne l'action de promouvoir un Contenu dans le système de découverte communautaire de l'Application.<br><br>
+      « Services » désigne l'ensemble des fonctionnalités proposées par l'Application.</p>
+
+      <h2>Article 2 — Accès et inscription</h2>
+      <h3>2.1 Conditions d'inscription</h3>
+      <p>L'utilisation de l'Application nécessite la création d'un compte. L'Utilisateur doit être âgé d'au moins 16 ans, ou disposer de l'autorisation d'un représentant légal. L'Utilisateur s'engage à fournir des informations exactes et à les maintenir à jour.</p>
+      <h3>2.2 Identifiants</h3>
+      <p>L'Utilisateur est seul responsable de la confidentialité de ses identifiants de connexion. Toute activité réalisée depuis son compte est réputée effectuée par lui. En cas de suspicion d'utilisation non autorisée, l'Utilisateur doit en informer l'Éditeur sans délai.</p>
+      <h3>2.3 Disponibilité</h3>
+      <p>L'Éditeur s'efforce d'assurer la disponibilité de l'Application mais ne garantit pas un accès ininterrompu. Des interruptions pour maintenance ou mise à jour peuvent survenir sans préavis.</p>
+
+      <h2>Article 3 — Propriété intellectuelle et droits d'auteur</h2>
+      <h3>3.1 Propriété de l'Application</h3>
+      <p>L'Application, son architecture, son design, son code source, ses logos et tout élément graphique ou fonctionnel sont la propriété exclusive de l'Éditeur et sont protégés par le droit de la propriété intellectuelle français et international.</p>
+      <h3>3.2 Garantie de détention des droits par l'Utilisateur</h3>
+      <p>En publiant un Contenu sur l'Application, l'Utilisateur déclare et garantit :<br><br>
+      — Être l'auteur original du Contenu, ou détenir l'ensemble des droits, licences et autorisations nécessaires à sa publication et sa diffusion sur l'Application.<br><br>
+      — Que le Contenu ne porte pas atteinte aux droits de propriété intellectuelle de tiers, notamment aux droits d'auteur, droits voisins, droits d'éditeur ou de producteur.<br><br>
+      — Que si le Contenu est distribué sur des plateformes tierces (Spotify, Deezer, Apple Music, etc.), l'Utilisateur dispose des autorisations nécessaires de ses éventuels éditeurs, labels ou distributeurs pour le publier également sur Beat.<br><br>
+      — Assumer l'entière responsabilité en cas de réclamation d'un tiers relative aux droits de propriété intellectuelle sur le Contenu publié.</p>
+      <h3>3.3 Licence accordée à l'Éditeur</h3>
+      <p>En publiant un Contenu, l'Utilisateur accorde à l'Éditeur une licence non exclusive, mondiale, gratuite et pour la durée de publication du Contenu, lui permettant de reproduire, représenter, adapter et distribuer le Contenu dans le cadre du fonctionnement de l'Application et de sa promotion.<br><br>
+      L'Utilisateur conserve l'intégralité de ses droits de propriété intellectuelle sur son Contenu. Il peut retirer son Contenu à tout moment, ce qui met fin à la licence accordée, sous réserve d'un délai technique raisonnable de suppression.</p>
+      <h3>3.4 Signalement et retrait</h3>
+      <p>L'Éditeur met à disposition un système de signalement permettant à tout ayant droit de notifier une atteinte à ses droits de propriété intellectuelle. Conformément à la législation applicable, l'Éditeur procédera au retrait prompt du Contenu litigieux après réception d'une notification complète et conforme.</p>
+      <h3>3.5 Évolution du modèle de droits</h3>
+      <p>L'Éditeur se réserve la possibilité de conclure, à terme, des accords de licence avec des sociétés de gestion collective (SACEM, SCPP, SPPF, etc.) ou des éditeurs et labels, afin de permettre la diffusion légale d'œuvres protégées sur l'Application.</p>
+
+      <h2>Article 4 — Règles de conduite</h2>
+      <p>L'Utilisateur s'engage à utiliser l'Application de manière responsable et respectueuse. Sont notamment interdits :<br><br>
+      — La publication de contenus illicites, diffamatoires, injurieux, discriminatoires, violents, pornographiques ou incitant à la haine.<br><br>
+      — Le harcèlement, l'intimidation ou toute forme de comportement abusif envers d'autres Utilisateurs.<br><br>
+      — L'usurpation d'identité ou la création de faux comptes.<br><br>
+      — L'utilisation de bots, scripts ou tout moyen automatisé pour interagir avec l'Application.<br><br>
+      — Toute tentative d'accès non autorisé aux systèmes de l'Application.<br><br>
+      L'Éditeur se réserve le droit de modérer, suspendre ou supprimer tout Contenu ou compte ne respectant pas les présentes CGU, sans préavis ni indemnisation.</p>
+
+      <h2>Article 5 — Protection des données personnelles</h2>
+      <h3>5.1 Responsable du traitement</h3>
+      <p>Le responsable du traitement des données personnelles est BeatItube, en sa qualité d'éditeur de l'Application.</p>
+      <h3>5.2 Données collectées</h3>
+      <p>Dans le cadre de l'utilisation de l'Application, les données suivantes peuvent être collectées : adresse e-mail, nom d'utilisateur (handle), avatar, préférences musicales (genres, filtres), contenus publiés, interactions (pushes, commentaires), et données techniques (type d'appareil, version de l'OS, logs de connexion).</p>
+      <h3>5.3 Finalités du traitement</h3>
+      <p>Les données personnelles sont collectées et traitées pour : la création et gestion du compte, la fourniture et amélioration des Services, la communication avec l'Utilisateur, la sécurité et modération de la plateforme, et l'analyse statistique anonymisée.</p>
+      <h3>5.4 Engagement de non-vente des données</h3>
+      <p>L'Éditeur s'engage à ne pas vendre les données personnelles de ses Utilisateurs à des tiers. Les données ne sont pas monnaie d'échange : elles sont collectées uniquement dans l'intérêt de l'Utilisateur et pour le bon fonctionnement de l'Application.</p>
+      <h3>5.5 Partage limité des données</h3>
+      <p>Les données personnelles pourront être partagées uniquement avec des prestataires techniques nécessaires au fonctionnement de l'Application (hébergement Supabase), en cas d'obligation légale ou de réquisition judiciaire, ou dans le cadre d'une éventuelle création de structure juridique.</p>
+      <h3>5.6 Droits de l'Utilisateur</h3>
+      <p>Conformément au RGPD et à la loi Informatique et Libertés, l'Utilisateur dispose des droits suivants : accès, rectification, effacement (« droit à l'oubli »), portabilité, limitation du traitement, opposition, et retrait du consentement.<br><br>
+      Ces droits peuvent être exercés par e-mail à l'adresse : contact@beatitube.com. L'Éditeur s'engage à répondre dans un délai d'un mois. En cas de difficulté, l'Utilisateur peut introduire une réclamation auprès de la CNIL (www.cnil.fr).</p>
+      <h3>5.7 Durée de conservation</h3>
+      <p>Les données personnelles sont conservées pour la durée nécessaire aux finalités pour lesquelles elles ont été collectées, et conformément aux obligations légales applicables.</p>
+      <h3>5.8 Sécurité</h3>
+      <p>L'Éditeur met en œuvre les mesures techniques et organisationnelles appropriées pour protéger les données personnelles. Les données sont hébergées par Supabase (infrastructure cloud conforme aux standards de sécurité SOC 2).</p>
+
+      <h2>Article 6 — Gratuité et modèle économique</h2>
+      <p>L'utilisation de l'Application est gratuite. L'Éditeur se réserve le droit d'introduire à l'avenir des fonctionnalités payantes, des abonnements ou un système de crédits.<br><br>
+      L'Éditeur s'engage à ne pas intégrer de publicité ciblée basée sur le profilage des Utilisateurs sans leur consentement explicite et préalable.</p>
+
+      <h2>Article 7 — Limitation de responsabilité</h2>
+      <p>L'Application est fournie « en l'état ». L'Éditeur ne saurait être tenu responsable des dommages directs ou indirects résultant de l'utilisation de l'Application.<br><br>
+      L'Éditeur agit en qualité d'hébergeur au sens de la LCEN s'agissant des Contenus publiés par les Utilisateurs.</p>
+
+      <h2>Article 8 — Modération et signalement</h2>
+      <p>L'Application dispose d'un système de signalement accessible depuis chaque Contenu. L'Éditeur s'engage à examiner les signalements dans un délai raisonnable et à prendre les mesures nécessaires.</p>
+
+      <h2>Article 9 — Modification des CGU</h2>
+      <p>L'Éditeur se réserve le droit de modifier les présentes CGU à tout moment. Les modifications seront notifiées aux Utilisateurs. La poursuite de l'utilisation de l'Application après notification vaut acceptation des nouvelles CGU.</p>
+
+      <h2>Article 10 — Résiliation</h2>
+      <p>L'Utilisateur peut supprimer son compte à tout moment depuis les paramètres de l'Application. La suppression entraîne l'effacement de ses données personnelles et de ses Contenus dans un délai de 30 jours.</p>
+
+      <h2>Article 11 — Droit applicable et litiges</h2>
+      <p>Les présentes CGU sont régies par le droit français. En cas de litige, les parties s'engagent à rechercher une solution amiable. À défaut, le litige sera soumis aux tribunaux compétents de Rennes.</p>
+
+      <h2>Article 12 — Contact</h2>
+      <p>Pour toute question relative aux présentes CGU ou à l'exercice de vos droits, vous pouvez contacter l'Éditeur à l'adresse suivante : contact@beatitube.com</p>
+    </div>
+
+    <!-- ==================== ENGLISH ==================== -->
+    <div class="lang-en">
+      <h2>Preamble</h2>
+      <p>These Terms of Use (hereinafter "Terms") govern access to and use of the Beat mobile application (hereinafter "the App"), published by BeatItube, an independent project based in Rennes, France (hereinafter "the Publisher").</p>
+      <p>The App is an independent project published on a personal basis. It is not backed by any commercial entity as of the date of publication of these Terms.</p>
+      <p>Beat is a short-format music discovery and sharing platform that allows users to publish, listen to and promote original audio clips. By using the App, the User acknowledges having read, understood and accepted these Terms in their entirety.</p>
+
+      <h2>Article 1 — Definitions</h2>
+      <p>"User" means any natural person who has created an account on the App and accepted these Terms.<br><br>
+      "Content" means any audio file, text (lyrics, descriptions), metadata, images (covers, avatars) or any other data published by a User on the App.<br><br>
+      "Push" means the action of promoting Content within the App's community discovery system.<br><br>
+      "Services" means all features offered by the App.</p>
+
+      <h2>Article 2 — Access and registration</h2>
+      <h3>2.1 Registration requirements</h3>
+      <p>Using the App requires creating an account. The User must be at least 16 years old, or have the authorization of a legal guardian. The User agrees to provide accurate information and keep it up to date.</p>
+      <h3>2.2 Credentials</h3>
+      <p>The User is solely responsible for the confidentiality of their login credentials. Any activity carried out from their account is deemed to have been carried out by them. In case of suspected unauthorized use, the User must inform the Publisher immediately.</p>
+      <h3>2.3 Availability</h3>
+      <p>The Publisher strives to ensure the availability of the App but does not guarantee uninterrupted access. Interruptions for maintenance or updates may occur without notice.</p>
+
+      <h2>Article 3 — Intellectual property and copyright</h2>
+      <h3>3.1 App ownership</h3>
+      <p>The App, its architecture, design, source code, logos and all graphic or functional elements are the exclusive property of the Publisher and are protected by French and international intellectual property law.</p>
+      <h3>3.2 User rights guarantee</h3>
+      <p>By publishing Content on the App, the User declares and warrants that:<br><br>
+      — They are the original author of the Content, or hold all rights, licenses and authorizations necessary for its publication and distribution on the App.<br><br>
+      — The Content does not infringe the intellectual property rights of third parties, including copyright, neighboring rights, publisher or producer rights.<br><br>
+      — If the Content is distributed on third-party platforms (Spotify, Deezer, Apple Music, etc.), the User has the necessary authorizations from their publishers, labels or distributors to also publish it on Beat.<br><br>
+      — They assume full responsibility in case of any third-party claim relating to intellectual property rights on the published Content.</p>
+      <h3>3.3 License granted to the Publisher</h3>
+      <p>By publishing Content, the User grants the Publisher a non-exclusive, worldwide, free license for the duration of the Content's publication, allowing it to reproduce, display, adapt and distribute the Content for the operation and promotion of the App.<br><br>
+      The User retains all intellectual property rights over their Content. They may remove their Content at any time, which terminates the granted license, subject to a reasonable technical deletion period.</p>
+      <h3>3.4 Reporting and removal</h3>
+      <p>The Publisher provides a reporting system allowing any rights holder to notify an infringement of their intellectual property rights. In accordance with applicable law, the Publisher will promptly remove the disputed Content upon receipt of a complete and compliant notification.</p>
+      <h3>3.5 Evolution of the rights model</h3>
+      <p>The Publisher reserves the right to enter into licensing agreements with collective management organizations (SACEM, SCPP, SPPF, etc.) or publishers and labels, to enable the legal distribution of protected works on the App.</p>
+
+      <h2>Article 4 — Code of conduct</h2>
+      <p>The User agrees to use the App responsibly and respectfully. The following are prohibited:<br><br>
+      — Publishing illegal, defamatory, abusive, discriminatory, violent, pornographic or hate-inciting content.<br><br>
+      — Harassment, intimidation or any form of abusive behavior towards other Users.<br><br>
+      — Identity theft or creation of fake accounts.<br><br>
+      — Use of bots, scripts or any automated means to interact with the App.<br><br>
+      — Any attempt to gain unauthorized access to the App's systems.<br><br>
+      The Publisher reserves the right to moderate, suspend or delete any Content or account that does not comply with these Terms, without notice or compensation.</p>
+
+      <h2>Article 5 — Personal data protection</h2>
+      <h3>5.1 Data controller</h3>
+      <p>The data controller is BeatItube, in its capacity as publisher of the App.</p>
+      <h3>5.2 Data collected</h3>
+      <p>In the course of using the App, the following data may be collected: email address, username (handle), avatar, music preferences (genres, filters), published content, interactions (pushes, comments), and technical data (device type, OS version, connection logs).</p>
+      <h3>5.3 Processing purposes</h3>
+      <p>Personal data is collected and processed for: account creation and management, provision and improvement of Services, communication with the User, platform security and moderation, and anonymized statistical analysis.</p>
+      <h3>5.4 Commitment not to sell data</h3>
+      <p>The Publisher commits not to sell Users' personal data to third parties. Data is not a bargaining chip: it is collected solely in the User's interest and for the proper functioning of the App.</p>
+      <h3>5.5 Limited data sharing</h3>
+      <p>Personal data may only be shared with technical service providers necessary for the operation of the App (Supabase hosting), in case of legal obligation or judicial requisition, or in the context of a possible creation of a legal entity.</p>
+      <h3>5.6 User rights</h3>
+      <p>In accordance with the GDPR and French data protection law, the User has the following rights: access, rectification, erasure ("right to be forgotten"), portability, restriction of processing, objection, and withdrawal of consent.<br><br>
+      These rights can be exercised by email at: contact@beatitube.com. The Publisher commits to responding within one month. In case of difficulty, the User may file a complaint with the CNIL (www.cnil.fr).</p>
+      <h3>5.7 Data retention</h3>
+      <p>Personal data is retained for the duration necessary for the purposes for which it was collected, and in accordance with applicable legal obligations.</p>
+      <h3>5.8 Security</h3>
+      <p>The Publisher implements appropriate technical and organizational measures to protect personal data. Data is hosted by Supabase (cloud infrastructure compliant with SOC 2 security standards).</p>
+
+      <h2>Article 6 — Free model and business model</h2>
+      <p>Use of the App is free. The Publisher reserves the right to introduce paid features, subscriptions or a credit system in the future.<br><br>
+      The Publisher commits not to integrate targeted advertising based on User profiling without their explicit prior consent.</p>
+
+      <h2>Article 7 — Limitation of liability</h2>
+      <p>The App is provided "as is." The Publisher shall not be held liable for any direct or indirect damages resulting from the use of the App.<br><br>
+      The Publisher acts as a host within the meaning of French LCEN law regarding Content published by Users.</p>
+
+      <h2>Article 8 — Moderation and reporting</h2>
+      <p>The App has a reporting system accessible from each piece of Content. The Publisher commits to reviewing reports within a reasonable time and taking necessary action.</p>
+
+      <h2>Article 9 — Modification of Terms</h2>
+      <p>The Publisher reserves the right to modify these Terms at any time. Modifications will be notified to Users. Continued use of the App after notification constitutes acceptance of the new Terms.</p>
+
+      <h2>Article 10 — Termination</h2>
+      <p>The User may delete their account at any time from the App's settings. Deletion results in the erasure of their personal data and Content within 30 days.</p>
+
+      <h2>Article 11 — Applicable law and disputes</h2>
+      <p>These Terms are governed by French law. In case of dispute, the parties agree to seek an amicable solution. Failing that, the dispute shall be submitted to the competent courts of Rennes.</p>
+
+      <h2>Article 12 — Contact</h2>
+      <p>For any question regarding these Terms or the exercise of your rights, you may contact the Publisher at: contact@beatitube.com</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      <a href="/privacy" class="lang-fr">Confidentialité</a>
+      <a href="/privacy" class="lang-en">Privacy</a>
+      <a href="/copyright">Copyright</a>
+      <a href="/mentions-legales" class="lang-fr">Mentions légales</a>
+      <a href="/mentions-legales" class="lang-en">Legal notice</a>
+      <a href="/">Beat</a>
+    </div>
   </div>
+
+  <script>
+    function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('en')?'en':'fr';}
+    function setLang(l){localStorage.setItem('beat-lang',l);applyLang(l);}
+    function applyLang(l){document.documentElement.lang=l;document.querySelectorAll('.lang-fr').forEach(e=>e.style.display=l==='fr'?'':'none');document.querySelectorAll('.lang-en').forEach(e=>e.style.display=l==='en'?'':'none');document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
+    applyLang(getLang());
+  </script>
 </body>
 </html>
