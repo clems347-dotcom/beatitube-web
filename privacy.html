@@ -128,7 +128,7 @@
       <h3>8.7 Retrait du consentement</h3>
       <p>Vous pouvez retirer votre consentement à tout moment sans affecter la licéité du traitement antérieur.</p>
       <h3>8.8 Exercice de vos droits</h3>
-      <p>Contact : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2e4d41405a4f4d5a6e4c4b4f5a475a5b4c4b004d4143">[email&#160;protected]</a> — Délai de réponse : 1 mois.</p>
+      <p>Contact : contact@beatitube.com — Délai de réponse : 1 mois.</p>
       <h3>8.9 Réclamation CNIL</h3>
       <p>CNIL — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07<br>Téléphone : 01 53 73 22 22 — www.cnil.fr</p>
 
@@ -142,8 +142,8 @@
       <p>Cette politique peut être modifiée. Toute modification substantielle sera notifiée au moins 30 jours avant son entrée en vigueur.</p>
 
       <h2>12. Contact</h2>
-      <p>E-mail : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0b3bfbea4b1b3a490b2b5b1a4b9a4a5b2b5feb3bfbd">[email&#160;protected]</a><br>Responsable du traitement : BeatItube — Rennes, France</p>
-      <p>Pour toute demande officielle : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a4adafa9a488aaada9bca1bcbdaaade6aba7a5">[email&#160;protected]</a></p>
+      <p>E-mail : contact@beatitube.com<br>Responsable du traitement : BeatItube — Rennes, France</p>
+      <p>Pour toute demande officielle : legal@beatitube.com</p>
     </div>
 
     <!-- ==================== ENGLISH ==================== -->
@@ -228,7 +228,7 @@
       <h3>8.7 Withdrawal of consent</h3>
       <p>You can withdraw your consent at any time without affecting the lawfulness of prior processing.</p>
       <h3>8.8 Exercising your rights</h3>
-      <p>Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066569687267657246646367726f727364632865696b">[email&#160;protected]</a> — Response time: 1 month.</p>
+      <p>Contact: contact@beatitube.com — Response time: 1 month.</p>
       <h3>8.9 CNIL complaint</h3>
       <p>CNIL — 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07<br>Phone: 01 53 73 22 22 — www.cnil.fr</p>
 
@@ -242,8 +242,8 @@
       <p>This policy may be modified. Any substantial change will be notified at least 30 days before taking effect.</p>
 
       <h2>12. Contact</h2>
-      <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f5969a9b81949681b5979094819c81809790db969a98">[email&#160;protected]</a><br>Data controller: BeatItube — Rennes, France</p>
-      <p>For official requests: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4a8a1a3a5a884a6a1a5b0adb0b1a6a1eaa7aba9">[email&#160;protected]</a></p>
+      <p>Email: contact@beatitube.com<br>Data controller: BeatItube — Rennes, France</p>
+      <p>For official requests: legal@beatitube.com</p>
     </div>
 
     <!-- FOOTER -->
@@ -257,4 +257,11 @@
     </div>
   </div>
 
-  <script
+  <script>
+    function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('en')?'en':'fr';}
+    function setLang(l){localStorage.setItem('beat-lang',l);applyLang(l);}
+    function applyLang(l){document.documentElement.lang=l;document.querySelectorAll('.lang-fr').forEach(e=>e.style.display=l==='fr'?'':'none');document.querySelectorAll('.lang-en').forEach(e=>e.style.display=l==='en'?'':'none');document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
+    applyLang(getLang());
+  </script>
+</body>
+</html>

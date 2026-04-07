@@ -50,7 +50,7 @@
       <h2>Éditeur</h2>
       <p>L'application Beat est éditée par Beatitube, projet indépendant de développement.</p>
       <p>Siège : Rennes, France</p>
-      <p>Contact : <a href="/cdn-cgi/l/email-protection#9af9f5f4eefbf9eedaf8fffbeef3eeeff8ffb4f9f5f7"><span class="__cf_email__" data-cfemail="197a76776d787a6d597b7c786d706d6c7b7c377a7674">[email&#160;protected]</span></a></p>
+      <p>Contact : <a href="mailto:contact@beatitube.com">contact@beatitube.com</a></p>
 
       <h2>Hébergement</h2>
       <p>Application et données hébergées par Supabase Inc.<br>Site web hébergé par Vercel Inc.</p>
@@ -60,7 +60,7 @@
 
       <h2>Données personnelles</h2>
       <p>Consultez notre <a href="/privacy">Politique de confidentialité</a>.</p>
-      <p>Contact DPO : <a href="/cdn-cgi/l/email-protection#0b676e6c6a674b696e6a7f627f7e696e25686466"><span class="__cf_email__" data-cfemail="4a262f2d2b260a282f2b3e233e3f282f64292527">[email&#160;protected]</span></a></p>
+      <p>Contact DPO : <a href="mailto:legal@beatitube.com">legal@beatitube.com</a></p>
     </div>
 
     <!-- ==================== ENGLISH ==================== -->
@@ -68,7 +68,7 @@
       <h2>Publisher</h2>
       <p>The Beat app is published by Beatitube, an independent development project.</p>
       <p>Headquarters: Rennes, France</p>
-      <p>Contact: <a href="/cdn-cgi/l/email-protection#5b3834352f3a382f1b393e3a2f322f2e393e75383436"><span class="__cf_email__" data-cfemail="a0c3cfced4c1c3d4e0c2c5c1d4c9d4d5c2c58ec3cfcd">[email&#160;protected]</span></a></p>
+      <p>Contact: <a href="mailto:contact@beatitube.com">contact@beatitube.com</a></p>
 
       <h2>Hosting</h2>
       <p>App and data hosted by Supabase Inc.<br>Website hosted by Vercel Inc.</p>
@@ -78,7 +78,7 @@
 
       <h2>Personal data</h2>
       <p>See our <a href="/privacy">Privacy Policy</a>.</p>
-      <p>DPO contact: <a href="/cdn-cgi/l/email-protection#cfa3aaa8aea38fadaaaebba6bbbaadaae1aca0a2"><span class="__cf_email__" data-cfemail="e08c8587818ca0828581948994958285ce838f8d">[email&#160;protected]</span></a></p>
+      <p>DPO contact: <a href="mailto:legal@beatitube.com">legal@beatitube.com</a></p>
     </div>
 
     <!-- FOOTER -->
@@ -92,5 +92,11 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function getLang(){const p=new URLSearchParams(location.search).get('lang');if
+  <script>
+    function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('en')?'en':'fr';}
+    function setLang(l){localStorage.setItem('beat-lang',l);applyLang(l);}
+    function applyLang(l){document.documentElement.lang=l;document.querySelectorAll('.lang-fr').forEach(e=>e.style.display=l==='fr'?'':'none');document.querySelectorAll('.lang-en').forEach(e=>e.style.display=l==='en'?'':'none');document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
+    applyLang(getLang());
+  </script>
+</body>
+</html>
