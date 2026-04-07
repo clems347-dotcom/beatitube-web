@@ -11,7 +11,7 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Outfit',sans-serif; background:var(--dark); color:var(--text); }
     .container { max-width:700px; margin:0 auto; padding:80px 24px 60px; }
-    .lang-en { display: none; }
+    html.fr .lang-en, html.en .lang-fr { display: none; }
     .back { display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); text-decoration:none; font-size:13px; font-weight:400; margin-bottom:32px; transition:color .2s; letter-spacing:0.5px; }
     .back:hover { color:var(--text); }
     .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
@@ -31,6 +31,7 @@
     .doc-footer a { color:var(--text-faint); font-size:13px; margin-right:16px; }
     .doc-footer a:hover { color:var(--text-dim); }
   </style>
+  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("en")?"en":"fr";document.documentElement.className=p;})()</script>
 </head>
 <body>
   <div class="container">
@@ -260,7 +261,7 @@
   <script>
     function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('en')?'en':'fr';}
     function setLang(l){localStorage.setItem('beat-lang',l);applyLang(l);}
-    function applyLang(l){document.documentElement.lang=l;document.querySelectorAll('.lang-fr').forEach(e=>e.style.display=l==='fr'?'':'none');document.querySelectorAll('.lang-en').forEach(e=>e.style.display=l==='en'?'':'none');document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
+    function applyLang(l){document.documentElement.lang=l;document.documentElement.className=l;document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
     applyLang(getLang());
   </script>
 </body>

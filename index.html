@@ -47,7 +47,7 @@
       overflow-x: hidden;
     }
 
-    .lang-en { display: none; }
+    html.fr .lang-en, html.en .lang-fr { display: none; }
 
     /* ====== LANG SWITCH ====== */
     .lang-switch {
@@ -214,6 +214,7 @@
       .lang-switch button { font-size: 11px; padding: 3px 8px; }
     }
   </style>
+  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("en")?"en":"fr";document.documentElement.className=p;})()</script>
 </head>
 <body>
 
@@ -482,8 +483,8 @@
 
     function applyLang(lang) {
       document.documentElement.lang = lang;
-      document.querySelectorAll('.lang-fr').forEach(el => el.style.display = lang === 'fr' ? '' : 'none');
-      document.querySelectorAll('.lang-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+      
+      document.documentElement.className = lang;
       document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     }
