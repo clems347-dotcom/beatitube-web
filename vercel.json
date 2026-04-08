@@ -5,7 +5,7 @@
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/mentions-legales", "destination": "/mentions-legales.html" },
     { "source": "/copyright", "destination": "/copyright.html" },
-    { "source": "/auth/reset-password", "destination": "/auth/reset-password.html" }
+    { "source": "/auth/reset-password", "destination": "/auth/reset-password.html" },
     { "source": "/delete-account", "destination": "/delete-account.html" }
   ],
   "headers": [
