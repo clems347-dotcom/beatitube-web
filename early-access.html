@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Access — Beat</title>
+  <meta name="description" content="Request early access to Beat, the independent music discovery app.">
+  <link rel="icon" type="image/svg+xml" href="/logo-red.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --red: #FF4444; --dark: #060608; --text: #f0f0f0; --text-dim: #777; --text-faint: #444; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
+    html.fr .lang-en, html.en .lang-fr { display: none; }
+
+    .lang-switch { position: fixed; top: 16px; right: 16px; z-index: 10; display: flex; gap: 4px; background: rgba(255,255,255,0.06); border-radius: 8px; padding: 2px; }
+    .lang-switch button { background: none; border: none; color: var(--text-faint); font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+    .lang-switch button.active { background: var(--red); color: #fff; }
+    .lang-switch button:hover:not(.active) { color: var(--text-dim); }
+
+    .container { max-width: 480px; margin: 0 auto; padding: 80px 24px 60px; }
+
+    .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+    .logo img { width: 32px; height: auto; }
+    .logo span { font-size: 18px; font-weight: 800; color: var(--red); letter-spacing: 3px; }
+
+    h1 { font-size: clamp(28px, 6vw, 36px); font-weight: 900; letter-spacing: -0.5px; margin-bottom: 12px; }
+    h1 span { color: var(--red); }
+
+    .subtitle { font-size: 16px; font-weight: 300; color: var(--text-dim); line-height: 1.7; margin-bottom: 36px; }
+
+    .form { display: flex; flex-direction: column; gap: 16px; }
+
+    .field label { display: block; color: var(--text-dim); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+      color: var(--text); font-family: 'Outfit', sans-serif; font-size: 15px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--red); }
+    .field input::placeholder, .field textarea::placeholder { color: var(--text-faint); }
+    .field select { appearance: none; cursor: pointer; }
+    .field select option { background: #111; color: #fff; }
+    .field textarea { resize: vertical; min-height: 60px; }
+
+    .role-row { display: flex; gap: 10px; }
+    .role-btn {
+      flex: 1; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04); text-align: center; cursor: pointer;
+      transition: all 0.2s; position: relative;
+    }
+    .role-btn:hover { border-color: rgba(255,255,255,0.15); }
+    .role-btn.active-artist { border-color: var(--red); background: rgba(255,68,68,0.08); }
+    .role-btn.active-pusher { border-color: #B9F2FF; background: rgba(185,242,255,0.06); }
+    .role-btn.active-both { border-color: #FFD700; background: rgba(255,215,0,0.06); }
+    .role-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .role-btn.active-artist .role-label { color: var(--red); }
+    .role-btn.active-pusher .role-label { color: #B9F2FF; }
+    .role-btn.active-both .role-label { color: #FFD700; }
+    .role-desc { font-size: 13px; color: var(--text-dim); }
+
+    .submit-btn {
+      padding: 16px; border: none; border-radius: 12px;
+      background: var(--red); color: #fff; font-family: 'Outfit', sans-serif;
+      font-size: 16px; font-weight: 800; cursor: pointer; letter-spacing: 0.5px;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .success {
+      text-align: center; padding: 40px 0;
+    }
+    .success-icon { font-size: 48px; margin-bottom: 16px; }
+    .success h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .success p { color: var(--text-dim); font-size: 15px; line-height: 1.6; }
+
+    .back-link { display: inline-block; margin-top: 24px; color: var(--text-faint); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-dim); }
+
+    .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); text-align: center; }
+    .footer a { color: var(--text-faint); text-decoration: none; font-size: 13px; margin: 0 8px; }
+    .footer a:hover { color: var(--text-dim); }
+  </style>
+  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("fr")?"fr":"en";document.documentElement.className=p;})()</script>
+</head>
+<body>
+  <div class="lang-switch">
+    <button onclick="setLang('fr')" id="btn-fr">FR</button>
+    <button onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+
+  <div class="container">
+    <a href="/" class="logo">
+      <img src="logo-red.svg" alt="Beat">
+      <span>BEAT</span>
+    </a>
+
+    <!-- FORM -->
+    <div id="form-section">
+      <h1 class="lang-fr"><span>Early Access</span></h1>
+      <h1 class="lang-en"><span>Early Access</span></h1>
+
+      <p class="subtitle lang-fr">
+        Beat est en phase de lancement. Rejoins les premiers utilisateurs et découvre l'app avant tout le monde.
+      </p>
+      <p class="subtitle lang-en">
+        Beat is launching soon. Join the first users and discover the app before everyone else.
+      </p>
+
+      <form class="form" id="ea-form">
+        <div class="field">
+          <label class="lang-fr">Email *</label>
+          <label class="lang-en">Email *</label>
+          <input type="email" name="email" required placeholder="you@email.com">
+        </div>
+
+        <div class="field">
+          <label class="lang-fr">Tu veux être...</label>
+          <label class="lang-en">I want to be a...</label>
+          <input type="hidden" name="role" id="role-input" value="">
+          <div class="role-row">
+            <div class="role-btn" onclick="selectRole('artist', this)">
+              <div class="role-label lang-fr">Artiste</div>
+              <div class="role-label lang-en">Artist</div>
+              <div class="role-desc lang-fr">Je veux publier ma musique</div>
+              <div class="role-desc lang-en">I want to publish my music</div>
+            </div>
+            <div class="role-btn" onclick="selectRole('pusher', this)">
+              <div class="role-label">Pusher</div>
+              <div class="role-desc lang-fr">Je veux découvrir des sons</div>
+              <div class="role-desc lang-en">I want to discover sounds</div>
+            </div>
+            <div class="role-btn" onclick="selectRole('both', this)">
+              <div class="role-label lang-fr">Les deux</div>
+              <div class="role-label lang-en">Both</div>
+              <div class="role-desc lang-fr">Artiste + Pusher</div>
+              <div class="role-desc lang-en">Artist + Pusher</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lang-fr">Localisation</label>
+          <label class="lang-en">Location</label>
+          <input type="text" name="location" placeholder="Paris, Lagos, Berlin...">
+        </div>
+
+        <div class="field">
+          <label class="lang-fr">Comment as-tu entendu parler de Beat ?</label>
+          <label class="lang-en">How did you hear about Beat?</label>
+          <select name="source">
+            <option value="" class="lang-fr">— Sélectionner —</option>
+            <option value="" class="lang-en">— Select —</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="twitter">Twitter / X</option>
+            <option value="friend" class="lang-fr">Un ami</option>
+            <option value="friend" class="lang-en">A friend</option>
+            <option value="search" class="lang-fr">Recherche Google</option>
+            <option value="search" class="lang-en">Google search</option>
+            <option value="other" class="lang-fr">Autre</option>
+            <option value="other" class="lang-en">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="lang-fr">Quelque chose à ajouter ? (optionnel)</label>
+          <label class="lang-en">Anything to add? (optional)</label>
+          <textarea name="message" rows="2" class="lang-fr" placeholder="Ton genre musical, tes attentes..."></textarea>
+          <textarea name="message" rows="2" class="lang-en" placeholder="Your music genre, expectations..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span class="lang-fr">Demander l'accès</span>
+          <span class="lang-en">Request access</span>
+        </button>
+      </form>
+
+      <a href="/" class="back-link">← <span class="lang-fr">Retour au site</span><span class="lang-en">Back to site</span></a>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="success-section" class="success" style="display:none;">
+      <div class="success-icon">🎵</div>
+      <h2 class="lang-fr">Demande envoyée !</h2>
+      <h2 class="lang-en">Request sent!</h2>
+      <p class="lang-fr">Merci ! On te contactera très vite avec ton accès. En attendant, suis-nous sur Instagram.</p>
+      <p class="lang-en">Thanks! We'll get back to you soon with your access. In the meantime, follow us on Instagram.</p>
+      <a href="https://instagram.com/beatitube" class="back-link" style="color:var(--red);">@beatitube</a>
+      <br>
+      <a href="/" class="back-link">← <span class="lang-fr">Retour au site</span><span class="lang-en">Back to site</span></a>
+    </div>
+
+    <div class="footer">
+      <a href="/privacy" class="lang-fr">Confidentialité</a>
+      <a href="/privacy" class="lang-en">Privacy</a>
+      <a href="/cgu" class="lang-fr">CGU</a>
+      <a href="/cgu" class="lang-en">Terms</a>
+      <a href="/">Beat</a>
+    </div>
+  </div>
+
+  <script>
+    function getLang(){const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='fr')return p;const s=localStorage.getItem('beat-lang');if(s==='en'||s==='fr')return s;return navigator.language.startsWith('fr')?'fr':'en';}
+    function setLang(l){localStorage.setItem('beat-lang',l);applyLang(l);}
+    function applyLang(l){document.documentElement.lang=l;document.documentElement.className=l;document.getElementById('btn-fr').classList.toggle('active',l==='fr');document.getElementById('btn-en').classList.toggle('active',l==='en');}
+    applyLang(getLang());
+
+    function selectRole(role, el) {
+      document.querySelectorAll('.role-btn').forEach(b => b.className = 'role-btn');
+      el.classList.add('active-' + role);
+      document.getElementById('role-input').value = role;
+    }
+
+    // Form submit
+    document.getElementById('ea-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      const data = {
+        email: this.querySelector('[name="email"]').value,
+        role: document.getElementById('role-input').value,
+        location: this.querySelector('[name="location"]').value,
+        source: this.querySelector('[name="source"]').value,
+        message: this.querySelector('[name="message"]').value,
+      };
+
+      try {
+        const resp = await fetch('/api/early-access', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (resp.ok) {
+          document.getElementById('form-section').querySelector('.form').style.display = 'none';
+          document.getElementById('form-section').querySelector('h1').style.display = 'none';
+          document.getElementById('form-section').querySelector('.subtitle').style.display = 'none';
+          document.getElementById('form-section').querySelector('.back-link').style.display = 'none';
+          document.getElementById('success-section').style.display = 'block';
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (err) {
+        const body = Object.entries(data).map(([k,v]) => k + ': ' + v).join('\n');
+        window.location.href = 'mailto:contact@beatitube.com?subject=Early Access Request&body=' + encodeURIComponent(body);
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<span class="lang-fr">Demander l\'accès</span><span class="lang-en">Request access</span>';
+      applyLang(getLang());
+    });
+  </script>
+</body>
+</html>

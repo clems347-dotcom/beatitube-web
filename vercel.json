@@ -6,6 +6,7 @@
     { "source": "/mentions-legales", "destination": "/mentions-legales.html" },
     { "source": "/copyright", "destination": "/copyright.html" },
     { "source": "/auth/reset-password", "destination": "/auth/reset-password.html" },
+    { "source": "/early-access", "destination": "/early-access.html" },
     { "source": "/delete-account", "destination": "/delete-account.html" }
   ],
   "headers": [
