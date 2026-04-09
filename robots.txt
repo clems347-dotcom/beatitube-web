@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://beatitube.com/sitemap.xml
