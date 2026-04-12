@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beat — Where sound connects.</title>
-  <meta name="description" content="Beat est l'app où l'on découvre les artistes émergents et indépendants. Publie ta musique, trouve ton audience, propulse les talents. Gratuit et sans pub.">
-  <meta name="keywords" content="beat, beatitube, découverte musicale, artiste émergent, artiste indépendant, pusher, talent, app musique, visibilité musicale">
+  <title>Beat — Discover New Music</title>
+  <meta name="description" content="Beat est l’app de découverte musicale en feed. Les artistes partagent leurs meilleurs moments. Tu découvres la musique en un geste.">
+  <meta name="keywords" content="beat, beatitube, music discovery, discover new music, new songs, indie artists, music feed, swipe music">
   <meta name="author" content="Beatitube">
-  <meta property="og:title" content="Beat — Where sound connects.">
-  <meta property="og:description" content="Découvre les artistes émergents et indépendants. Publie ta musique, trouve ton audience. Gratuit et sans pub.">
+  <meta property="og:title" content="Beat — Discover New Music">
+  <meta property="og:description" content="La manière la plus simple de découvrir la musique. Les artistes partagent leurs meilleurs moments.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://beatitube.com">
+  <meta property="og:image" content="https://beatitube.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://beatitube.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="logo-red.svg">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <meta property="og:image" content="https://beatitube.com/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:image" content="https://beatitube.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --red: #FF4444;
-      --red-glow: rgba(255, 68, 68, 0.4);
-      --red-soft: rgba(255, 68, 68, 0.1);
+      --red-glow: rgba(255, 68, 68, 0.35);
+      --yellow: #FFE81F;
+      --yellow-glow: rgba(255, 232, 31, 0.25);
       --dark: #060608;
-      --dark-card: rgba(255,255,255,0.03);
-      --dark-card-border: rgba(255,255,255,0.06);
-      --text: #f0f0f0;
-      --text-dim: #777;
-      --text-faint: #444;
+      --dark-soft: rgba(255,255,255,0.03);
+      --dark-border: rgba(255,255,255,0.08);
+      --text: #f3f3f3;
+      --text-dim: #b3b3b8;
+      --text-faint: #787882;
+      --max: 1120px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Outfit', sans-serif;
       background: var(--dark);
@@ -47,183 +48,625 @@
       overflow-x: hidden;
     }
 
-    html.fr .lang-en, html.en .lang-fr { display: none; }
+    html.fr .lang-en,
+    html.en .lang-fr { display: none !important; }
 
-    /* ====== LANG SWITCH ====== */
-    .lang-switch {
-      display: flex; gap: 4px; align-items: center;
-      background: rgba(255,255,255,0.06);
-      border-radius: 8px; padding: 2px;
-    }
-    .lang-switch button {
-      background: none; border: none; color: var(--text-faint);
-      font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
-      padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
-    }
-    .lang-switch button.active { background: var(--red); color: #fff; }
-    .lang-switch button:hover:not(.active) { color: var(--text-dim); }
+    a { color: inherit; }
 
-    /* ====== SPACE BACKGROUND ====== */
     .space-bg {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0; pointer-events: none; overflow: hidden;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
     .space-bg__static {
-      position: absolute; width: 100%; height: 100%;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      animation: beatGlow 500ms ease-in-out infinite alternate;
+      opacity: 0.76;
+      animation: pulseBg 900ms ease-in-out infinite alternate;
     }
-    @keyframes beatGlow { 0% { opacity: 0.55; } 100% { opacity: 0.85; } }
     .space-bg__clouds {
-      position: absolute; width: 90vmax; height: 90vmax;
-      left: calc(45% - 45vmax); top: calc(68% - 45vmax);
-      object-fit: contain; opacity: 0.7;
-      animation: cloudRotate 75s linear infinite;
+      position: absolute;
+      width: 90vmax;
+      height: 90vmax;
+      left: calc(45% - 45vmax);
+      top: calc(68% - 45vmax);
+      object-fit: contain;
+      opacity: 0.72;
+      animation: rotateClouds 75s linear infinite;
     }
-    @keyframes cloudRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .space-bg__vignette {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(ellipse at 45% 68%, transparent 20%, var(--dark) 70%);
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.18), transparent 45%),
+        radial-gradient(ellipse at 45% 68%, transparent 22%, var(--dark) 74%);
+    }
+    @keyframes pulseBg {
+      0% { opacity: 0.68; }
+      100% { opacity: 0.82; }
+    }
+    @keyframes rotateClouds {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    /* ====== CONTENT ====== */
-    .content { position: relative; z-index: 1; }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
 
-    /* ====== NAV ====== */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 14px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(6, 6, 8, 0.6);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: rgba(6, 6, 8, 0.58);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { width: 24px; height: auto; }
-    .nav-logo span { font-size: 16px; font-weight: 800; color: var(--red); letter-spacing: 3px; }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-links { display: flex; gap: 24px; flex-shrink: 1; }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 24px;
+      height: auto;
+    }
+    .nav-logo span {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: 3px;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+    }
     .nav-links a {
-      color: var(--text-dim); text-decoration: none; font-size: 14px;
-      font-weight: 400; transition: color 0.3s; letter-spacing: 0.5px; white-space: nowrap;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.2s ease;
+      white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover {
+      color: var(--text);
+    }
 
-    /* ====== HERO ====== */
+    .lang-switch {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 2px;
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      color: var(--text-faint);
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lang-switch button.active {
+      background: var(--red);
+      color: white;
+    }
+
     .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; text-align: center;
-      padding: 100px 24px 60px; position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 112px 24px 48px;
     }
-    .hero-logo { width: 108px; height: auto; margin-bottom: 16px; filter: drop-shadow(0 0 40px var(--red-glow)); }
+    .hero-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-copy {
+      max-width: 620px;
+    }
     .hero h1 {
-      font-size: clamp(36px, 8vw, 56px); font-weight: 900; letter-spacing: 8px;
-      line-height: 1; margin-bottom: 16px; color: var(--red);
-      text-shadow: 0 0 60px var(--red-glow), 0 2px 20px rgba(0,0,0,0.8);
+      font-size: clamp(40px, 6vw, 76px);
+      line-height: 0.97;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+      text-shadow: 0 6px 30px rgba(0,0,0,0.45);
     }
-    .hero .tagline {
-      font-size: clamp(14px, 2.5vw, 18px); font-weight: 300; color: var(--text-dim);
-      max-width: 400px; line-height: 1.7; margin-bottom: 48px;
-      letter-spacing: 0.3px; text-shadow: 0 1px 10px rgba(0,0,0,0.9);
+    .hero h1 .accent {
+      color: var(--yellow);
+      text-shadow: 0 0 24px var(--yellow-glow);
     }
-    .hero .tagline em { font-style: normal; color: var(--text); font-weight: 500; }
-    .stores { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    .store-row { display: flex; gap: 12px; align-items: center; }
-    .store-badge { height: 40px; cursor: default; }
-    .store-badge-android { opacity: 0.9; filter: none; }
-    .store-badge-ios { opacity: 0.3; filter: grayscale(1); }
-    .store-label { font-size: 12px; color: var(--text-faint); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
-    .early-access-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 28px; border: 1px solid var(--red); border-radius: 100px;
-      font-size: 15px; font-weight: 700; color: var(--red);
-      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px;
-      text-decoration: none; transition: all 0.3s;
-      animation: badgePulse 2s ease-in-out infinite;
+    .hero-tagline {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: 0.2px;
     }
-    .early-access-btn:hover { background: rgba(255,68,68,0.1); text-decoration: none; }
-    .badge-dot { display: inline-block; width: 7px; height: 7px; background: var(--red); border-radius: 50%; animation: dotBlink 1s infinite; }
-    @keyframes badgePulse { 0%, 100% { box-shadow: 0 0 0 rgba(255,68,68,0); } 50% { box-shadow: 0 0 20px rgba(255,68,68,0.2); } }
-    @keyframes dotBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .scroll-hint {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-      color: var(--text-faint); font-size: 11px; font-weight: 300;
-      letter-spacing: 2px; text-transform: uppercase;
-      animation: scrollFade 2.5s ease-in-out infinite;
+    .hero-sub {
+      font-size: clamp(18px, 2.2vw, 23px);
+      line-height: 1.45;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 30px;
     }
-    @keyframes scrollFade { 0%, 100% { opacity: 0.2; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.6; transform: translateX(-50%) translateY(4px); } }
+    .hero-sub strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+    .hero-points span {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 10px 30px rgba(255,68,68,0.22);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+    }
+    .store-badges {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .store-badge {
+      height: 40px;
+      transition: transform 0.2s ease;
+    }
+    .store-badge:hover {
+      transform: translateY(-1px);
+    }
+    .store-note {
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-card {
+      width: min(100%, 420px);
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(8,8,12,0.72);
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.45),
+        0 0 40px rgba(255,232,31,0.06);
+      backdrop-filter: blur(12px);
+    }
+    .hero-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,232,31,0.16) 0%, rgba(255,232,31,0.02) 45%, transparent 70%);
+      filter: blur(30px);
+      z-index: -1;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 
-    /* ====== SECTIONS ====== */
-    section.text-section { padding: 100px 24px; max-width: 800px; margin: 0 auto; }
-    .section-label { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
-    .text-section h2 { font-size: clamp(26px, 5vw, 38px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; text-shadow: 0 2px 15px rgba(0,0,0,0.7); }
-    .text-section .lead { font-size: 18px; font-weight: 300; color: var(--text-dim); line-height: 1.8; max-width: 560px; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+    .section {
+      padding: 100px 24px;
+    }
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+    .section h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      text-shadow: 0 3px 18px rgba(0,0,0,0.32);
+    }
+    .section-lead {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 720px;
+    }
+    .section-lead strong {
+      color: var(--text);
+      font-weight: 600;
+    }
 
-    /* ====== DUAL BLOCKS ====== */
-    .dual { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
-    @media (max-width: 640px) { .dual { grid-template-columns: 1fr; } }
-    .block { background: var(--dark-card); border: 1px solid var(--dark-card-border); border-radius: 20px; padding: 32px; transition: border-color 0.4s; }
-    .block:hover { border-color: rgba(255,255,255,0.1); }
-    .block-label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 20px; }
-    .block.artist .block-label { background: var(--red-soft); color: var(--red); }
-    .block.pusher .block-label { background: rgba(185,242,255,0.07); color: #B9F2FF; }
-    .block h3 { font-size: 20px; font-weight: 700; margin-bottom: 14px; line-height: 1.3; }
-    .block p { font-size: 16px; font-weight: 300; color: var(--text-dim); line-height: 1.7; }
-    .block ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
-    .block ul li { font-size: 16px; font-weight: 300; color: var(--text-dim); line-height: 1.6; padding-left: 16px; position: relative; }
-    .block ul li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; }
-    .block.artist ul li::before { background: var(--red); }
-    .block.pusher ul li::before { background: #B9F2FF; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .feature-card {
+      background: var(--dark-soft);
+      border: 1px solid var(--dark-border);
+      border-radius: 24px;
+      padding: 26px;
+      backdrop-filter: blur(10px);
+    }
+    .feature-card .mini-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-dim);
+    }
+    .feature-card h3 {
+      font-size: 22px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .feature-card p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
 
-    /* ====== STEPS ====== */
-    .steps { display: flex; flex-direction: column; gap: 32px; margin-top: 40px; }
-    .step { display: flex; gap: 20px; align-items: flex-start; }
-    .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--red); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--red); margin-top: 2px; }
-    .step-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-    .step-content p { font-size: 16px; font-weight: 300; color: var(--text-dim); line-height: 1.7; }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .role-card {
+      background: var(--dark-soft);
+      border: 1px solid var(--dark-border);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+    .role-card .role-badge {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .role-card.artist .role-badge {
+      color: var(--red);
+      background: rgba(255,68,68,0.08);
+    }
+    .role-card.listener .role-badge {
+      color: var(--yellow);
+      background: rgba(255,232,31,0.08);
+    }
+    .role-card h3 {
+      font-size: 26px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .role-card p {
+      color: var(--text-dim);
+      line-height: 1.7;
+      font-size: 16px;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+    .role-card ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .role-card li {
+      position: relative;
+      padding-left: 16px;
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    .role-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.9;
+    }
 
-    .sep { width: 40px; height: 1px; background: var(--red); margin: 0 auto; opacity: 0.3; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .step-card {
+      background: var(--dark-soft);
+      border: 1px solid var(--dark-border);
+      border-radius: 24px;
+      padding: 28px;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,68,68,0.5);
+      color: var(--red);
+      font-weight: 800;
+    }
+    .step-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+    .step-card p {
+      color: var(--text-dim);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
 
-    /* ====== FOOTER ====== */
-    footer { padding: 60px 24px 36px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
-    .footer-brand { font-size: 16px; font-weight: 500; color: var(--text-dim); margin-bottom: 16px; }
-    .footer-brand .beat-red { color: var(--red); font-weight: 700; }
-    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-    .footer-links a { color: var(--text-faint); text-decoration: none; font-size: 14px; font-weight: 400; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text-dim); }
-    .copyright { font-size: 13px; color: var(--text-faint); font-weight: 300; }
+    .positioning {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 52px 32px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.22);
+    }
+    .positioning p {
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.35;
+      color: var(--text);
+      font-weight: 300;
+    }
+    .positioning strong {
+      font-weight: 800;
+      color: var(--yellow);
+      text-shadow: 0 0 20px var(--yellow-glow);
+    }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .cta {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .cta h2 {
+      margin-bottom: 18px;
+    }
+    .cta p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-dim);
+      margin-bottom: 28px;
+    }
 
-    @media (max-width: 600px) {
-      nav { padding: 10px 12px; }
-      .nav-logo img { width: 20px; }
-      .nav-logo span { font-size: 13px; letter-spacing: 2px; }
-      .nav-links { gap: 12px; }
-      .nav-links a { font-size: 10px; letter-spacing: 0; }
-      .text-section { padding: 60px 16px; }
-      .text-section h2 { font-size: 28px; }
-      .text-section .lead { font-size: 17px; line-height: 1.8; }
-      .section-label { font-size: 12px; }
-      .block h3 { font-size: 19px; }
-      .block ul li { font-size: 15px; }
-      .block p { font-size: 15px; }
-      .step-content h3 { font-size: 17px; }
-      .step-content p { font-size: 15px; }
-      .hero .tagline { font-size: 16px; }
-      .early-access-btn { font-size: 14px; }
-      .store-label { font-size: 11px; }
-      .lang-switch button { font-size: 11px; padding: 3px 8px; }
+    footer {
+      padding: 56px 24px 36px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-size: 15px;
+      color: var(--text-dim);
+    }
+    .footer-brand strong {
+      color: var(--red);
+      font-weight: 800;
+    }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-faint);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-links a:hover {
+      color: var(--text);
+    }
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-faint);
+      font-weight: 300;
+      margin-top: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .feature-grid,
+      .split,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 96px;
+      }
+      .hero-visual {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        padding: 10px 12px;
+      }
+      .nav-right {
+        gap: 10px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .nav-logo img {
+        width: 20px;
+      }
+      .nav-logo span {
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+      .hero,
+      .section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .hero {
+        padding-bottom: 28px;
+      }
+      .hero-points {
+        gap: 8px;
+      }
+      .hero-points span {
+        font-size: 12px;
+      }
+      .positioning {
+        padding: 34px 22px;
+      }
+      .section-lead {
+        font-size: 18px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
-  <script>(function(){var p=new URLSearchParams(location.search).get("lang");if(!p)try{p=localStorage.getItem("beat-lang")}catch(e){}if(!p)p=navigator.language.startsWith("fr")?"fr":"en";document.documentElement.className=p;})()</script>
+  <script>
+    (function () {
+      var p = new URLSearchParams(location.search).get("lang");
+      if (!p) {
+        try { p = localStorage.getItem("beat-lang"); } catch (e) {}
+      }
+      if (!p) p = navigator.language && navigator.language.startsWith("fr") ? "fr" : "en";
+      document.documentElement.className = p === "en" ? "en" : "fr";
+      document.documentElement.lang = p === "en" ? "en" : "fr";
+    })();
+  </script>
 </head>
 <body>
-
-  <!-- SPACE BACKGROUND -->
-  <div class="space-bg">
+  <div class="space-bg" aria-hidden="true">
     <picture>
       <source srcset="space_static.webp" type="image/webp">
       <img src="space_static.png" alt="" class="space-bg__static">
@@ -235,7 +678,6 @@
     <div class="space-bg__vignette"></div>
   </div>
 
-  <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">
       <img src="logo-red.svg" alt="Beat">
@@ -245,268 +687,370 @@
       <div class="nav-links">
         <a href="#concept" class="lang-fr">Concept</a>
         <a href="#concept" class="lang-en">Concept</a>
-        <a href="#roles" class="lang-fr">Artistes & Pushers</a>
-        <a href="#roles" class="lang-en">Artists & Pushers</a>
+        <a href="#difference" class="lang-fr">Différence</a>
+        <a href="#difference" class="lang-en">Why it’s different</a>
+        <a href="#roles" class="lang-fr">Pour qui</a>
+        <a href="#roles" class="lang-en">For who</a>
         <a href="#how" class="lang-fr">Comment ça marche</a>
         <a href="#how" class="lang-en">How it works</a>
       </div>
       <div class="lang-switch">
-        <button onclick="setLang('fr')" id="btn-fr">FR</button>
-        <button onclick="setLang('en')" id="btn-en">EN</button>
+        <button id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
       </div>
     </div>
   </nav>
 
   <div class="content">
-
-    <!-- HERO -->
     <section class="hero">
-      <img src="logo-red.svg" alt="Beat" class="hero-logo">
-      <h1>BEAT</h1>
-      <p class="tagline lang-fr">
-        <em>Where sound connects.</em><br>
-        Trouve ton audience. Trouve tes futurs hits.
-      </p>
-      <p class="tagline lang-en">
-        <em>Where sound connects.</em><br>
-        Find your audience. Find your next hits.
-      </p>
-      <a href="/early-access" class="early-access-btn">
-        <span class="badge-dot"></span>
-        Early Access
-      </a>
-      <div class="stores">
-        <div class="store-row">
-          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" class="store-badge store-badge-ios">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="store-badge store-badge-android">
-        </div>
-        <span class="store-label lang-fr">Disponible sur Android · iOS bientôt</span>
-        <span class="store-label lang-en">Available on Android · iOS coming soon</span>
-      </div>
-      <div class="scroll-hint">↓</div>
-    </section>
+      <div class="hero-inner">
+        <div class="hero-copy">
 
-    <div class="sep"></div>
+          <h1 class="lang-fr">Découvrir la <span class="accent">musique</span></h1>
+          <h1 class="lang-en">Discover New <span class="accent">Music</span></h1>
 
-    <!-- CONCEPT -->
-    <section id="concept" class="text-section reveal">
-      <div class="section-label lang-fr">Le concept</div>
-      <div class="section-label lang-en">The concept</div>
-      <h2 class="lang-fr">Là où la musique se découvre vraiment</h2>
-      <h2 class="lang-en">Where music is truly discovered</h2>
-      <p class="lead lang-fr">
-        Beat est un espace où les artistes émergents et indépendants se rendent visibles et où les auditeurs explorent selon leurs préférences. On découvre, on se connecte, on partage. Chaque son est une rencontre. Chaque découverte est un pari.
-      </p>
-      <p class="lead lang-en">
-        Beat is a space where emerging and independent artists get seen, and where listeners explore based on their own tastes. Discover, connect, share. Every sound is a meeting. Every discovery is a bet.
-      </p>
-    </section>
+          <p class="hero-tagline lang-fr">Trouve les artistes qui te définissent.</p>
+          <p class="hero-tagline lang-en">Find the artists that define you.</p>
 
-    <div class="sep"></div>
+          <p class="hero-sub lang-fr">
+            <strong>Les artistes partagent leurs meilleurs moments.</strong>
+            Tu fais défiler un feed à ton image.
+          </p>
+          <p class="hero-sub lang-en">
+            <strong>Artists share their best moments.</strong>
+            Scroll through a feed tailored to you.
+          </p>
 
-    <!-- ROLES -->
-    <section id="roles" class="text-section reveal">
-      <div class="section-label lang-fr">Deux rôles</div>
-      <div class="section-label lang-en">Two roles</div>
-      <h2>Artistes &amp; Pushers</h2>
-      <div class="dual">
-        <div class="block artist">
-          <div class="block-label lang-fr">Artiste</div>
-          <div class="block-label lang-en">Artist</div>
-          <h3 class="lang-fr">Trouve ton audience active</h3>
-          <h3 class="lang-en">Find your active audience</h3>
-          <ul class="lang-fr">
-            <li>Upload ton son et crée ta boucle sur la partie la plus percutante</li>
-            <li>Redirige les auditeurs vers tes plateformes (Spotify, YouTube, Deezer, Bandcamp…)</li>
-            <li>Ajoute tes lyrics synchronisées directement depuis l'app</li>
-            <li>Visible localement et dans le monde entier — grâce à la localisation de ta musique</li>
-            <li>Construis ta fanbase organique — que des vrais</li>
-          </ul>
-          <ul class="lang-en">
-            <li>Upload your track and create a loop on the catchiest part</li>
-            <li>Redirect listeners to your platforms (Spotify, YouTube, Deezer, Bandcamp…)</li>
-            <li>Add synced lyrics directly from the app</li>
-            <li>Visible locally and worldwide — through the location of your music</li>
-            <li>Build an organic fanbase — real people only</li>
-          </ul>
-        </div>
-        <div class="block pusher">
-          <div class="block-label">Pusher</div>
-          <h3>The rest of the best</h3>
-          <ul class="lang-fr">
-            <li>Explore, écoute et push les sons qui te parlent</li>
-            <li>Trois niveaux d'engagement : Push, Love ou Gold</li>
-            <li>Recherche active par localisation et par genre</li>
-            <li>Tes préférences, tes filtres — ta découverte</li>
-            <li>Construis ta réputation de découvreur de talent</li>
-          </ul>
-          <ul class="lang-en">
-            <li>Explore, listen and push the sounds that speak to you</li>
-            <li>Three engagement levels: Push, Love or Gold</li>
-            <li>Search by location and genre</li>
-            <li>Your preferences, your filters — your discovery</li>
-            <li>Build your reputation as a talent scout</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <div class="sep"></div>
-
-    <!-- HOW IT WORKS -->
-    <section id="how" class="text-section reveal">
-      <div class="section-label lang-fr">Comment ça marche</div>
-      <div class="section-label lang-en">How it works</div>
-      <h2 class="lang-fr">3 étapes, c'est tout</h2>
-      <h2 class="lang-en">3 steps, that's it</h2>
-      <div class="steps lang-fr">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>Crée ton profil</h3>
-            <p>Définis tes genres préférés, tes zones géographiques, tes filtres. Le Tube s'adapte à toi — c'est toi qui choisis ce que tu veux découvrir.</p>
+          <div class="hero-points lang-fr">
+            <span>Feed fluide</span>
+            <span>Extraits courts</span>
+            <span>Pas de pub</span>
+            <span>Pas de paywall</span>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>Artiste : publie ton son</h3>
-            <p>Upload ton fichier WAV ou MP3, découpe ta boucle, personnalise ta track. Ajoute tes lyrics synchronisées directement depuis l'app. Le focus est sur l'audio — pas d'image, pas de clip. Ajoute tes liens de redirection (Spotify, YouTube, Deezer…) et laisse la communauté te trouver.</p>
+          <div class="hero-points lang-en">
+            <span>Smooth feed</span>
+            <span>Short tracks</span>
+            <span>No ads</span>
+            <span>No paywall</span>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>Pusher : explore et connecte-toi</h3>
-            <p>Parcours le Tube, follow les artistes et les pushers qui te ressemblent. Affine tes préférences, tes zones, tes filtres. Push les sons qui te parlent — et construis ta réputation de découvreur.</p>
+
+          <div class="hero-actions">
+            <a href="/early-access" class="btn-primary lang-fr">Rejoindre l’early access</a>
+            <a href="/early-access" class="btn-primary lang-en">Join early access</a>
+
+            <a href="#concept" class="btn-secondary lang-fr">Voir le concept</a>
+            <a href="#concept" class="btn-secondary lang-en">See the concept</a>
           </div>
-        </div>
-      </div>
-      <div class="steps lang-en">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>Create your profile</h3>
-            <p>Set your favorite genres, geographic areas, and filters. The Tube adapts to you — you decide what you want to discover.</p>
+
+          <div class="store-badges">
+            <a href="https://apps.apple.com/app/beat" target="_blank" rel="noopener">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" class="store-badge">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.beat" target="_blank" rel="noopener">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="store-badge">
+            </a>
           </div>
+          <div class="store-note lang-fr">Disponible sur iOS et Android</div>
+          <div class="store-note lang-en">Available on iOS and Android</div>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>Artist: publish your sound</h3>
-            <p>Upload your WAV or MP3 file, trim your loop, customize your track. Add synced lyrics directly from the app. The focus is on audio — no images, no clips. Add your redirect links (Spotify, YouTube, Deezer…) and let the community find you.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>Pusher: explore and connect</h3>
-            <p>Browse the Tube, follow artists and pushers who match your taste. Fine-tune your preferences, areas, and filters. Push the sounds that speak to you — and build your reputation as a talent scout.</p>
+
+        <div class="hero-visual">
+          <div class="hero-glow"></div>
+          <div class="hero-card">
+            <img src="hero.jpeg" alt="Beat app preview">
           </div>
         </div>
       </div>
     </section>
 
-    <div class="sep"></div>
+    <section id="concept" class="section reveal">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-label lang-fr">Le concept</div>
+          <div class="section-label lang-en">The concept</div>
 
-    <!-- FREE & INDEPENDENT -->
-    <section class="text-section reveal">
-      <div class="section-label lang-fr">Gratuit, sans pub, indépendant</div>
-      <div class="section-label lang-en">Free, ad-free, independent</div>
-      <h2 class="lang-fr">Un projet construit pour la musique</h2>
-      <h2 class="lang-en">A project built for music</h2>
-      <p class="lead lang-fr">
-        Beat est une app indépendante, développée par Beatitube en dehors des circuits traditionnels de l'industrie musicale. Pas de major derrière, pas de fonds d'investissement, pas d'intérêts publicitaires. L'app est gratuite, sans pub, et conçue avec une seule obsession : créer un espace utile pour les artistes et les auditeurs passionnés. Beat existe parce que la scène indépendante mérite ses propres outils — des outils pensés pour elle, par des gens qui la vivent.
-      </p>
-      <p class="lead lang-fr" style="margin-top: 16px;">
-        Pourquoi c'est gratuit ? Parce que Beat a été pensé pour être léger. Pas de streaming illimité, pas de base de données massive — juste des extraits de 30 secondes, mis en valeur par des visuels générés à partir de l'audio. L'infrastructure reste minimale, les coûts aussi. Beat n'est pas une plateforme de streaming. C'est un espace de découverte où la fraîcheur prime, où chaque artiste a sa chance, et où la musique parle d'elle-même. Tu restes maître de ta musique et de tes données — supprime ce que tu veux, quand tu veux, rien n'est conservé.
-      </p>
-      <p class="lead lang-en">
-        Beat is an independent app, built by Beatitube outside the traditional music industry. No major label behind it, no venture capital, no advertising interests. The app is free, ad-free, and designed with a single obsession: creating a useful space for artists and passionate listeners. Beat exists because the independent scene deserves its own tools — tools built for it, by people who live it.
-      </p>
-      <p class="lead lang-en" style="margin-top: 16px;">
-        Why is it free? Because Beat was designed to be lightweight. No unlimited streaming, no massive database — just 30-second clips, brought to life by visuals generated from the audio itself. The infrastructure stays minimal, and so do the costs. Beat isn't a streaming platform. It's a discovery space where freshness comes first, where every artist gets a fair shot, and where the music speaks for itself. You stay in control of your music and your data — delete anything, anytime, nothing is kept.
-      </p>
+          <h2 class="lang-fr">La manière la plus simple de découvrir la musique</h2>
+          <h2 class="lang-en">The easiest way to discover new music</h2>
+
+          <p class="section-lead lang-fr">
+            Un <strong>feed fluide</strong>. Des <strong>extraits courts</strong>. Pas d’algorithme qui décide à ta place.
+            Juste des sons, et des gens qui les font émerger.
+          </p>
+          <p class="section-lead lang-en">
+            A <strong>smooth feed</strong>. <strong>Short tracks</strong>. No algorithm deciding for you.
+            Just sounds, and people pushing them forward.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="mini-label lang-fr">Découverte</div>
+            <div class="mini-label lang-en">Discovery</div>
+            <h3 class="lang-fr">Un feed pensé pour aller vite</h3>
+            <h3 class="lang-en">A feed built for speed</h3>
+            <p class="lang-fr">Tu découvres sans chercher. Tu écoutes, tu passes au suivant.</p>
+            <p class="lang-en">You discover without searching. Swipe, listen, move to the next one.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="mini-label lang-fr">Audio first</div>
+            <div class="mini-label lang-en">Audio first</div>
+            <h3 class="lang-fr">La musique avant le reste</h3>
+            <h3 class="lang-en">Music comes first</h3>
+            <p class="lang-fr">Le focus est sur l’audio. Pas besoin de clip pour capter l’attention.</p>
+            <p class="lang-en">The focus is on audio. No video needed to earn attention.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="mini-label lang-fr">Humain</div>
+            <div class="mini-label lang-en">Human</div>
+            <h3 class="lang-fr">Des signaux envoyés par la communauté</h3>
+            <h3 class="lang-en">Signals sent by the community</h3>
+            <p class="lang-fr">Ce qui monte, c’est ce que les gens aiment vraiment — pas ce qui paye le plus.</p>
+            <p class="lang-en">What rises is what people truly love — not what pays the most.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <div class="sep"></div>
+    <section id="difference" class="section reveal">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-label lang-fr">Pourquoi c’est différent</div>
+          <div class="section-label lang-en">Why it’s different</div>
 
-    <!-- VISIBILITY -->
-    <section class="text-section reveal">
-      <div class="section-label lang-fr">Visibilité</div>
-      <div class="section-label lang-en">Visibility</div>
-      <h2 class="lang-fr">Fais-toi connaître, ici et partout</h2>
-      <h2 class="lang-en">Get discovered, here and everywhere</h2>
-      <p class="lead lang-fr">
-        Beat est un outil de promotion artistique pensé pour les indépendants. Gagne en visibilité localement — dans ta ville, ta région — ou touche des auditeurs à l'autre bout du monde. Les filtres géographiques et par genre permettent aux pushers de te découvrir naturellement, selon leurs goûts, pas selon un budget marketing.
-      </p>
-      <p class="lead lang-en">
-        Beat is a music promotion tool built for independents. Gain visibility locally — in your city, your region — or reach listeners on the other side of the world. Geographic and genre filters let pushers discover you naturally, based on their taste, not a marketing budget.
-      </p>
-      <p class="lead lang-fr" style="margin-top: 16px;">
-        Que tu sois rappeur à Rennes, productrice électro à Berlin, chanteur afrobeat à Lagos ou beatmaker lo-fi à Tokyo, Beat te connecte à une audience qui cherche activement de la nouveauté. Chaque push est un signal envoyé à la communauté. Plus ton son est poussé, plus il gagne en visibilité dans le Tube. C'est une promotion organique, portée par des humains, pas par un budget.
-      </p>
-      <p class="lead lang-en" style="margin-top: 16px;">
-        Whether you're a rapper in Rennes, an electro producer in Berlin, an afrobeat singer in Lagos or a lo-fi beatmaker in Tokyo, Beat connects you with an audience actively looking for new sounds. Each push is a signal sent to the community. The more your track gets pushed, the more visibility it gains in the Tube. It's organic promotion, driven by people, not by budgets.
-      </p>
-      <p class="lead lang-fr" style="margin-top: 16px;">
-        Pour les labels indépendants, Beat est aussi un moyen de donner de l'exposition à leur catalogue et de suivre en temps réel comment leur musique circule : qui écoute, qui push, qui clique vers les plateformes de streaming. Des données concrètes, au service de votre stratégie artistique.
-      </p>
-      <p class="lead lang-en" style="margin-top: 16px;">
-        For independent labels, Beat is also a way to give exposure to their catalog and track in real time how their music circulates: who listens, who pushes, who clicks through to streaming platforms. Concrete data, at the service of your artistic strategy.
-      </p>
+          <h2 class="lang-fr">Seulement le meilleur de chaque son</h2>
+          <h2 class="lang-en">Only the best part of every track</h2>
+
+          <p class="section-lead lang-fr">
+            Les artistes choisissent la partie la plus percutante de leur morceau.
+            <strong>Pas d’intro trop longue. Pas d’attente.</strong> Juste l’essentiel.
+          </p>
+          <p class="section-lead lang-en">
+            Artists choose the most impactful moment of their track.
+            <strong>No long intro. No waiting.</strong> Just the part that matters.
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="role-card artist">
+            <div class="role-badge lang-fr">Pour les artistes</div>
+            <div class="role-badge lang-en">For artists</div>
+            <h3 class="lang-fr">Publie vite. Sois visible. Grandis.</h3>
+            <h3 class="lang-en">Publish fast. Get seen. Grow.</h3>
+            <p class="lang-fr">Choisis ton meilleur moment, ajoute tes lyrics synchronisées et redirige ton audience vers tes plateformes.</p>
+            <p class="lang-en">Pick your strongest moment, add synced lyrics, and send listeners to your platforms.</p>
+            <ul class="lang-fr">
+              <li>Upload en WAV ou MP3</li>
+              <li>Loop sur la partie la plus forte</li>
+              <li>Redirection vers Spotify, YouTube, Deezer, Bandcamp</li>
+              <li>Stats en temps réel</li>
+            </ul>
+            <ul class="lang-en">
+              <li>Upload in WAV or MP3</li>
+              <li>Loop the strongest part</li>
+              <li>Redirect to Spotify, YouTube, Deezer, Bandcamp</li>
+              <li>Real-time analytics</li>
+            </ul>
+          </div>
+
+          <div class="role-card listener">
+            <div class="role-badge lang-fr">Pour les auditeurs</div>
+            <div class="role-badge lang-en">For listeners</div>
+            <h3 class="lang-fr">Découvre avant tout le monde</h3>
+            <h3 class="lang-en">Discover before everyone else</h3>
+            <p class="lang-fr">Explore, écoute et fais remonter les sons qui te parlent dans un feed adapté à tes goûts.</p>
+            <p class="lang-en">Explore, listen, and push up the sounds that connect with you in a feed tailored to your taste.</p>
+            <ul class="lang-fr">
+              <li>Feed vertical personnalisé</li>
+              <li>Filtres par genre et localisation</li>
+              <li>Engagement Push, Love, Gold</li>
+              <li>Découverte qui a un impact réel</li>
+            </ul>
+            <ul class="lang-en">
+              <li>Personalized vertical feed</li>
+              <li>Filters by genre and location</li>
+              <li>Push, Love, Gold engagement</li>
+              <li>Discovery with real impact</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- FOOTER -->
+    <section id="roles" class="section reveal">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-label lang-fr">Pour qui</div>
+          <div class="section-label lang-en">Who it’s for</div>
+
+          <h2 class="lang-fr">Une app pour faire émerger la musique</h2>
+          <h2 class="lang-en">An app built to surface music</h2>
+
+          <p class="section-lead lang-fr">
+            Que tu sois rappeur à Rennes, productrice électro à Berlin, chanteur afrobeat à Lagos ou beatmaker lo-fi à Tokyo,
+            Beat te connecte à une audience qui cherche activement de la nouveauté.
+          </p>
+          <p class="section-lead lang-en">
+            Whether you’re a rapper in Rennes, an electro producer in Berlin, an afrobeat singer in Lagos, or a lo-fi beatmaker in Tokyo,
+            Beat connects you with people actively looking for something new.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="mini-label lang-fr">Visibilité</div>
+            <div class="mini-label lang-en">Visibility</div>
+            <h3 class="lang-fr">Localement et partout</h3>
+            <h3 class="lang-en">Local and global</h3>
+            <p class="lang-fr">Ta musique peut circuler dans ta ville comme à l’autre bout du monde grâce aux filtres et à la découverte par zones.</p>
+            <p class="lang-en">Your music can circulate in your city or across the world through filters and location-based discovery.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="mini-label lang-fr">Fanbase</div>
+            <div class="mini-label lang-en">Fanbase</div>
+            <h3 class="lang-fr">Des vraies personnes, pas du budget</h3>
+            <h3 class="lang-en">Real people, not paid reach</h3>
+            <p class="lang-fr">Ta traction vient d’auditeurs engagés, pas d’un budget média ni d’un placement algorithmique.</p>
+            <p class="lang-en">Your traction comes from engaged listeners, not media budget or algorithmic placement.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="mini-label lang-fr">Produit</div>
+            <div class="mini-label lang-en">Product</div>
+            <h3 class="lang-fr">Pas de streaming infini</h3>
+            <h3 class="lang-en">Not endless streaming</h3>
+            <p class="lang-fr">Beat n’essaie pas d’être une plateforme de streaming. C’est un espace de découverte rapide, frais et utile.</p>
+            <p class="lang-en">Beat is not trying to be a streaming platform. It’s a fast, fresh, useful discovery space.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section reveal">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-label lang-fr">Comment ça marche</div>
+          <div class="section-label lang-en">How it works</div>
+
+          <h2 class="lang-fr">Trois étapes, c’est tout</h2>
+          <h2 class="lang-en">Three steps, that’s it</h2>
+
+          <p class="section-lead lang-fr">Crée ton profil. Publie ou explore. Fais remonter les sons que tu aimes.</p>
+          <p class="section-lead lang-en">Create your profile. Publish or explore. Push up the sounds you love.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3 class="lang-fr">Crée ton profil</h3>
+            <h3 class="lang-en">Create your profile</h3>
+            <p class="lang-fr">Choisis tes genres, tes zones et tes préférences. Le Tube s’adapte à toi.</p>
+            <p class="lang-en">Choose your genres, locations, and preferences. The Tube adapts to you.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3 class="lang-fr">Publie ou explore</h3>
+            <h3 class="lang-en">Publish or explore</h3>
+            <p class="lang-fr">Artiste : upload ton son et découpe ta boucle. Auditeur : commence à explorer et à découvrir.</p>
+            <p class="lang-en">Artist: upload your track and trim your loop. Listener: start swiping and discovering.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3 class="lang-fr">Fais remonter ce qui te parle</h3>
+            <h3 class="lang-en">Push up what speaks to you</h3>
+            <p class="lang-fr">Chaque signal compte. Plus un son plaît, plus il gagne en visibilité dans le Tube.</p>
+            <p class="lang-en">Every signal matters. The more a track connects, the more visibility it gets in the Tube.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-inner">
+        <div class="positioning">
+          <p class="lang-fr"><strong>Beat n’est pas une plateforme de streaming.</strong><br>C’est un espace où la musique se découvre vraiment.</p>
+          <p class="lang-en"><strong>Beat is not a streaming platform.</strong><br>It’s a place where music is truly discovered.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-inner">
+        <div class="cta">
+          <div class="section-label lang-fr">Early access</div>
+          <div class="section-label lang-en">Early access</div>
+
+          <h2 class="lang-fr">Trouve ce qui te définit.</h2>
+          <h2 class="lang-en">Find what defines you.</h2>
+
+          <p class="lang-fr">
+            Pas de pub. Pas de paywall. Juste des artistes, des auditeurs et une nouvelle manière de découvrir la musique.
+          </p>
+          <p class="lang-en">
+            No ads. No paywall. Just artists, listeners, and a new way to discover music.
+          </p>
+
+          <a href="/early-access" class="btn-primary lang-fr">Rejoindre l’early access</a>
+          <a href="/early-access" class="btn-primary lang-en">Join early access</a>
+        </div>
+      </div>
+    </section>
+
     <footer>
-      <div class="footer-brand"><span class="beat-red">Beat</span>itube</div>
-      <div class="footer-links">
-        <a href="/cgu">CGU</a>
-        <a href="/privacy" class="lang-fr">Confidentialité</a>
-        <a href="/privacy" class="lang-en">Privacy</a>
-        <a href="/mentions-legales" class="lang-fr">Mentions légales</a>
-        <a href="/mentions-legales" class="lang-en">Legal notice</a>
-        <a href="/copyright">Copyright</a>
-        <a href="mailto:contact@beatitube.com">Contact</a>
+      <div class="footer-inner">
+        <div class="footer-brand"><strong>Beat</strong>itube</div>
+        <div class="footer-links">
+          <a href="/cgu">CGU</a>
+          <a href="/privacy" class="lang-fr">Confidentialité</a>
+          <a href="/privacy" class="lang-en">Privacy</a>
+          <a href="/mentions-legales" class="lang-fr">Mentions légales</a>
+          <a href="/mentions-legales" class="lang-en">Legal notice</a>
+          <a href="/copyright">Copyright</a>
+          <a href="/cdn-cgi/l/email-protection#4e2d21203a2f2d3a0e2c2b2f3a273a3b2c2b602d2123">Contact</a>
+        </div>
+        <p class="footer-copyright lang-fr">Indépendant et gratuit · © 2026 Beatitube</p>
+        <p class="footer-copyright lang-en">Independent and free · © 2026 Beatitube</p>
       </div>
-      <p class="copyright lang-fr">Indépendant et gratuit · © 2026 Beatitube</p>
-      <p class="copyright lang-en">Independent and free · © 2026 Beatitube</p>
     </footer>
-
   </div>
 
-  <script>
-    // Language detection: ?lang= param > localStorage > navigator.language > fr
-    function getLang() {
-      const params = new URLSearchParams(location.search);
-      const p = params.get('lang');
-      if (p === 'en' || p === 'fr') return p;
-      const stored = localStorage.getItem('beat-lang');
-      if (stored === 'en' || stored === 'fr') return stored;
-      return navigator.language.startsWith('fr') ? 'fr' : 'en';
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function applyLang(lang) {
+      const safeLang = lang === 'en' ? 'en' : 'fr';
+      document.documentElement.className = safeLang;
+      document.documentElement.lang = safeLang;
+      document.getElementById('btn-fr').classList.toggle('active', safeLang === 'fr');
+      document.getElementById('btn-en').classList.toggle('active', safeLang === 'en');
+      try { localStorage.setItem('beat-lang', safeLang); } catch (e) {}
     }
 
     function setLang(lang) {
-      localStorage.setItem('beat-lang', lang);
       applyLang(lang);
     }
 
-    function applyLang(lang) {
-      document.documentElement.lang = lang;
-      
-      document.documentElement.className = lang;
-      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    }
+    (function initLang() {
+      const params = new URLSearchParams(location.search);
+      const paramLang = params.get('lang');
+      let stored = null;
+      try { stored = localStorage.getItem('beat-lang'); } catch (e) {}
+      const detected = navigator.language && navigator.language.startsWith('fr') ? 'fr' : 'en';
+      applyLang(paramLang || stored || detected);
+    })();
 
-    applyLang(getLang());
-
-    // Reveal on scroll
     const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
     }, { threshold: 0.15 });
-    reveals.forEach(r => obs.observe(r));
+    reveals.forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
