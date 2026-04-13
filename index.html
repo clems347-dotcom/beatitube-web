@@ -195,21 +195,27 @@
     .hero-copy {
       max-width: 620px;
     }
+    .hero-title-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
     .hero-logo {
       width: 120px;
       height: auto;
-      margin-bottom: 24px;
+      flex-shrink: 0;
       filter: drop-shadow(0 0 40px var(--red-glow));
     }
-    .hero h1 {
+    .hero-brand {
       font-size: clamp(40px, 6vw, 76px);
       line-height: 0.97;
       font-weight: 900;
       letter-spacing: -2px;
-      margin-bottom: 18px;
+      margin-bottom: 0;
       text-shadow: 0 6px 30px rgba(0,0,0,0.45);
     }
-    .hero h1 .accent {
+    .hero-brand .accent {
       color: var(--yellow);
       text-shadow: 0 0 24px var(--yellow-glow);
     }
@@ -353,7 +359,7 @@
       color: var(--red);
       margin-bottom: 14px;
     }
-    .section h2 {
+    .section h1, .section h2 {
       font-size: clamp(30px, 4vw, 52px);
       line-height: 1.05;
       font-weight: 800;
@@ -538,6 +544,13 @@
       max-width: 760px;
       margin: 0 auto;
     }
+    .cta-seo {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-dim);
+      font-weight: 300;
+      margin-top: 8px;
+    }
     .cta h2 {
       margin-bottom: 18px;
     }
@@ -665,6 +678,19 @@
       document.documentElement.lang = p === "en" ? "en" : "fr";
     })();
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Beat",
+    "applicationCategory": "MusicApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "description": "Beat est une plateforme de découverte musicale et de promotion pour artistes émergents et indépendants.",
+    "url": "https://beatitube.com",
+    "author": { "@type": "Organization", "name": "Beatitube" }
+  }
+  </script>
 </head>
 <body>
   <div class="space-bg" aria-hidden="true">
@@ -705,10 +731,13 @@
       <div class="hero-inner">
         <div class="hero-copy">
 
-          <img src="logo-red.svg" alt="Beat" class="hero-logo">
-
-          <h1 class="lang-fr">Music <span class="accent">Discovery</span></h1>
-          <h1 class="lang-en">Music <span class="accent">Discovery</span></h1>
+          <div class="hero-title-row">
+            <img src="logo-red.svg" alt="Beat" class="hero-logo">
+            <div>
+              <div class="hero-brand lang-fr" role="presentation">Music <span class="accent">Discovery</span></div>
+              <div class="hero-brand lang-en" role="presentation">Music <span class="accent">Discovery</span></div>
+            </div>
+          </div>
 
           <p class="hero-tagline">What's emerging</p>
 
@@ -757,8 +786,8 @@
           <div class="section-label lang-fr">Le concept</div>
           <div class="section-label lang-en">The concept</div>
 
-          <h2 class="lang-fr">La manière la plus simple de découvrir la musique</h2>
-          <h2 class="lang-en">The easiest way to discover new music</h2>
+          <h1 class="lang-fr">Découvrez de nouveaux artistes — la manière la plus simple de découvrir la musique</h1>
+          <h1 class="lang-en">Discover new artists — the easiest way to find new music</h1>
 
           <p class="section-lead lang-fr">
             Un <strong>feed fluide</strong> dans lequel les nouveautés se rendent visibles et les auditeurs explorent, réagissent et retrouvent les artistes sur leurs plateformes préférées.
@@ -776,8 +805,8 @@
             <div class="mini-label lang-en">Discovery</div>
             <h3 class="lang-fr">Un feed pensé pour aller vite</h3>
             <h3 class="lang-en">A feed built for speed</h3>
-            <p class="lang-fr">Tu découvres sans chercher. Tu écoutes, tu passes au suivant.</p>
-            <p class="lang-en">You discover without searching. Swipe, listen, move to the next one.</p>
+            <p class="lang-fr">Tu découvres de nouveaux artistes sans chercher. Tu écoutes, tu passes au suivant.</p>
+            <p class="lang-en">You discover new artists without searching. Swipe, listen, move to the next one.</p>
           </div>
 
           <div class="feature-card">
@@ -813,11 +842,11 @@
 
           <p class="section-lead lang-fr">
             Que tu sois rappeur à Rennes, productrice électro à Berlin, chanteur afrobeat à Lagos ou beatmaker lo-fi à Tokyo,
-            Beat te connecte à une audience qui cherche activement de la nouveauté.
+            Beat te connecte à une audience qui cherche activement de nouveaux artistes émergents.
           </p>
           <p class="section-lead lang-en">
             Whether you’re a rapper in Rennes, an electro producer in Berlin, an afrobeat singer in Lagos, or a lo-fi beatmaker in Tokyo,
-            Beat connects you with people actively looking for something new.
+            Beat connects you with listeners actively looking for new and emerging artists.
           </p>
         </div>
 
@@ -912,10 +941,16 @@
           <h2 class="lang-en">Find what defines you.</h2>
 
           <p class="lang-fr">
-            Pas de pub. Pas de paywall. Juste des artistes, des auditeurs et une nouvelle manière de découvrir la musique.
+Pas de pub. Pas de paywall. Juste des artistes, des auditeurs et une nouvelle manière de découvrir la musique.
+          </p>
+          <p class="cta-seo lang-fr">
+            Beat est une plateforme de découverte musicale et de promotion pour artistes émergents et indépendants. Découvre de nouveaux sons, soutiens les artistes que tu aimes et retrouve-les sur tes plateformes préférées.
           </p>
           <p class="lang-en">
             No ads. No paywall. Just artists, listeners, and a new way to discover music.
+          </p>
+          <p class="cta-seo lang-en">
+            Beat is a music discovery and promotion platform for emerging and independent artists. Discover new sounds, support the artists you love and find them on your favorite platforms.
           </p>
 
           <a href="/early-access" class="btn-primary lang-fr">Rejoindre l’early access</a>
