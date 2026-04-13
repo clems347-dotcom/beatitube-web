@@ -198,14 +198,15 @@
     .hero-title-row {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: clamp(12px, 2vw, 20px);
       margin-bottom: 18px;
     }
     .hero-logo {
-      width: 120px;
-      height: auto;
+      height: 1.95em;
+      width: auto;
       flex-shrink: 0;
       filter: drop-shadow(0 0 40px var(--red-glow));
+      font-size: clamp(40px, 6vw, 76px);
     }
     .hero-brand {
       font-size: clamp(40px, 6vw, 76px);
