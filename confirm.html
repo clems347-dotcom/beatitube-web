@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email confirmé — Beat</title>
+  <link rel="icon" type="image/svg+xml" href="../logo-red.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --red: #FF4444; --dark: #060608; --card: #111115; --text: #e8e8e8; --text-dim: #888; --border: #1a1a22; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    /* Space background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.25), transparent),
+        radial-gradient(1.2px 1.2px at 80% 20%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1.5px 1.5px at 65% 85%, rgba(255,255,255,0.35), transparent),
+        radial-gradient(1px 1px at 35% 45%, rgba(255,255,255,0.15), transparent),
+        radial-gradient(1.3px 1.3px at 90% 50%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(ellipse at 50% 50%, rgba(255,68,68,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      margin-bottom: 8px;
+    }
+    .logo-wrap svg {
+      width: 56px;
+      height: 56px;
+    }
+    .app-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .tagline {
+      font-size: 12px;
+      color: var(--red);
+      font-style: italic;
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 28px;
+      margin-bottom: 24px;
+    }
+
+    /* States */
+    .state { display: none; }
+    .state.active { display: block; }
+
+    /* Success state */
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 68, 68, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .success-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .card h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .card p.en {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    /* Button */
+    .btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 14px 40px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(255, 68, 68, 0.3);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .fallback-text {
+      font-size: 13px;
+      color: #555;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* Spinner for loading state */
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error state */
+    .error-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 68, 68, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    /* Store buttons */
+    .stores {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+    .store-btn:hover {
+      border-color: #333;
+    }
+    .store-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 24px;
+      font-size: 11px;
+      color: #444;
+    }
+    .footer a {
+      color: var(--red);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,8 90,30 90,70 50,92 10,70 10,30" fill="#FF4444" opacity="0.9"/>
+        <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="#060608"/>
+        <polygon points="50,28 70,40 70,60 50,72 30,60 30,40" fill="#FF4444" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="app-name">BEAT</div>
+    <div class="tagline">Where sound connects</div>
+
+    <!-- Card -->
+    <div class="card">
+
+      <!-- Loading state -->
+      <div class="state active" id="loadingState">
+        <div class="spinner"></div>
+        <h2>Confirmation...</h2>
+        <p>Vérification de ton adresse email</p>
+        <p class="en">Verifying your email address</p>
+      </div>
+
+      <!-- Success state -->
+      <div class="state" id="successState">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h2>Email confirmé ! 🎵</h2>
+        <p>Ton compte Beat est activé. Retourne sur l'app pour te connecter.</p>
+        <p class="en">Your Beat account is active. Go back to the app to log in.</p>
+
+        <button class="btn" id="openAppBtn" onclick="openApp()">
+          Ouvrir Beat
+        </button>
+
+        <p class="fallback-text">
+          Si l'app ne s'ouvre pas, retourne manuellement sur Beat et connecte-toi.<br>
+          <em>If the app doesn't open, go back to Beat and log in.</em>
+        </p>
+
+        <div class="stores">
+          <a href="https://apps.apple.com/app/beatitube" class="store-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.beatitube" class="store-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.3 2.3-8.636-8.632z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div class="state" id="errorState">
+        <div class="error-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <h2>Lien invalide</h2>
+        <p>Ce lien a expiré ou a déjà été utilisé.</p>
+        <p class="en">This link has expired or has already been used.</p>
+        <p style="margin-top: 16px;">
+          <a href="https://beatitube.com" style="color: var(--red); text-decoration: none; font-weight: 600;">← Retour à beatitube.com</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <a href="https://beatitube.com">beatitube.com</a> •
+      <a href="mailto:contact@beatitube.com" style="color: #555;">contact@beatitube.com</a>
+      <br>© 2026 BeatItube • Rennes, France
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Supabase confirmation flow:
+      // When user clicks the confirmation link in their email, Supabase processes the confirmation
+      // server-side and redirects to the redirect URL with tokens in the hash fragment.
+      //
+      // The ConfirmationURL from Supabase already handles the confirmation — by the time
+      // the user lands here, their email is already confirmed.
+      //
+      // We check for tokens/type in the URL to confirm this is a valid redirect from Supabase.
+
+      const hash = window.location.hash.substring(1);
+      const searchParams = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(hash);
+
+      const accessToken = hashParams.get('access_token') || searchParams.get('access_token');
+      const refreshToken = hashParams.get('refresh_token') || searchParams.get('refresh_token');
+      const type = hashParams.get('type') || searchParams.get('type');
+      const tokenHash = searchParams.get('token_hash');
+
+      const loadingEl = document.getElementById('loadingState');
+      const successEl = document.getElementById('successState');
+      const errorEl = document.getElementById('errorState');
+
+      // If we have any Supabase params, the email is confirmed
+      if (accessToken || tokenHash || type === 'signup' || type === 'email') {
+        // Show success
+        setTimeout(function() {
+          loadingEl.classList.remove('active');
+          successEl.classList.add('active');
+
+          // Auto-attempt deep link after a short delay
+          setTimeout(function() {
+            tryOpenApp();
+          }, 800);
+        }, 1200);
+      } else {
+        // No tokens at all — could be a direct visit or expired link
+        // Check if the URL has any hash/params that indicate Supabase processed it
+        if (window.location.hash || window.location.search) {
+          // Some params present but not the ones we expect — still likely confirmed
+          setTimeout(function() {
+            loadingEl.classList.remove('active');
+            successEl.classList.add('active');
+          }, 1200);
+        } else {
+          // Clean URL with no params — invalid/expired or direct visit
+          setTimeout(function() {
+            loadingEl.classList.remove('active');
+            errorEl.classList.add('active');
+          }, 800);
+        }
+      }
+
+      function tryOpenApp() {
+        // Try deep link — build URL with tokens so app can optionally auto-login
+        var deepLink = 'beat://confirm';
+        if (accessToken) {
+          deepLink += '?access_token=' + encodeURIComponent(accessToken);
+          if (refreshToken) deepLink += '&refresh_token=' + encodeURIComponent(refreshToken);
+          if (type) deepLink += '&type=' + encodeURIComponent(type);
+        }
+
+        // Try to open via iframe (works on some Android browsers)
+        var iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = deepLink;
+        document.body.appendChild(iframe);
+
+        // Also try direct navigation after a short delay
+        setTimeout(function() {
+          window.location.href = deepLink;
+        }, 300);
+
+        // Clean up iframe
+        setTimeout(function() {
+          document.body.removeChild(iframe);
+        }, 2000);
+      }
+
+      window.openApp = function() {
+        tryOpenApp();
+      };
+    })();
+  </script>
+
+</body>
+</html>
