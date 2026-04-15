@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OG Image — Beat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #060608;
+      font-family: 'Outfit', sans-serif;
+    }
+    .frame {
+      width: 1200px;
+      height: 630px;
+      background: #060608;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .space-bg {
+      position: absolute;
+      inset: 0;
+      background: url('space_static.png') center center / cover no-repeat;
+      opacity: 0.6;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .title-row img {
+      height: 160px;
+      width: auto;
+      filter: drop-shadow(0 0 40px rgba(255, 68, 68, 0.35));
+    }
+    .title-text {
+      font-size: 82px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -2px;
+    }
+    .title-text .music {
+      color: #f3f3f3;
+      text-shadow: 0 6px 30px rgba(0,0,0,0.45);
+    }
+    .title-text .discovery {
+      color: #FFE81F;
+      text-shadow: 0 0 24px rgba(255, 232, 31, 0.25);
+    }
+    .tagline {
+      font-size: 26px;
+      font-weight: 400;
+      color: #b3b3b8;
+      letter-spacing: 0.3px;
+    }
+    .url {
+      font-size: 18px;
+      font-weight: 300;
+      color: #787882;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="space-bg"></div>
+    <div class="content">
+      <div class="title-row">
+        <img src="logo-red.svg" alt="Beat">
+        <div class="title-text">
+          <div class="music">Music</div>
+          <div class="discovery">Discovery</div>
+        </div>
+      </div>
+      <div class="tagline">What's emerging.</div>
+      <div class="url">beatitube.com</div>
+    </div>
+  </div>
+</body>
+</html>
