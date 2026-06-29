@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beat — Music Discovery</title>
-  <meta name="description" content="Beat est l’app de découverte et de promotion musicale. Les artistes partagent leurs meilleurs moments. Les auditeurs explorent et réagissent.">
-  <meta name="keywords" content="beat, beatitube, music discovery, music promotion, promote music, emerging artists, independent music, new songs, indie artists, music feed, swipe music">
+  <title>Beat — Let your ears lead</title>
+  <meta name="description" content="Beat — tes oreilles te guident vers les sons qui montent, pas l’algorithme. Digge des instrus, pose ta voix, dépose tes sons. iOS & Android.">
+  <meta name="keywords" content="beat, beatitube, music discovery, découverte musicale, beatmaker, instrumental, beats, instru, lyrics, paroles, marketplace instru, BeatStars, Airbit, indie artists, independent music">
   <meta name="author" content="Beatitube">
-  <meta property="og:title" content="Beat — Music Discovery">
-  <meta property="og:description" content="L’app de découverte et de promotion musicale. Les artistes partagent leurs meilleurs moments. Les auditeurs explorent et réagissent.">
+  <meta property="og:title" content="Beat — Let your ears lead">
+  <meta property="og:description" content="Tes oreilles te guident vers les sons qui montent, pas l’algorithme. Digge des instrus, pose ta voix sur les beats, dépose tes sons.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://beatitube.com">
   <meta property="og:image" content="https://beatitube.com/og-image.png">
@@ -150,6 +150,26 @@
     }
     .nav-links a:hover {
       color: var(--text);
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: var(--red);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(255,68,68,0.22);
+      transition: transform 0.2s ease;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
     }
 
     .lang-switch {
@@ -687,7 +707,7 @@
     "applicationCategory": "MusicApplication",
     "operatingSystem": "iOS, Android",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-    "description": "Beat est une plateforme de découverte musicale et de promotion pour artistes émergents et indépendants.",
+    "description": "Beat — tes oreilles te guident vers les sons qui montent, pas l’algorithme. Digge des instrus, pose ta voix dessus, dépose tes sons. Le pont entre le streaming et les marketplaces d’instrus.",
     "url": "https://beatitube.com",
     "author": { "@type": "Organization", "name": "Beatitube" }
   }
@@ -713,17 +733,18 @@
     </a>
     <div class="nav-right">
       <div class="nav-links">
-        <a href="#concept" class="lang-fr">Concept</a>
-        <a href="#concept" class="lang-en">Concept</a>
-        <a href="#roles" class="lang-fr">Pour les artistes</a>
-        <a href="#roles" class="lang-en">For who</a>
-        <a href="#how" class="lang-fr">Comment ça marche</a>
-        <a href="#how" class="lang-en">How it works</a>
+        <a href="#dig" class="lang-fr">Digger</a>
+        <a href="#dig" class="lang-en">Dig</a>
+        <a href="#studio" class="lang-fr">Studio</a>
+        <a href="#studio" class="lang-en">Studio</a>
+        <a href="#bridge" class="lang-fr">Le pont</a>
+        <a href="#bridge" class="lang-en">The bridge</a>
       </div>
       <div class="lang-switch">
         <button id="btn-fr" onclick="setLang('fr')">FR</button>
         <button id="btn-en" onclick="setLang('en')">EN</button>
       </div>
+      <a href="#get" class="nav-cta">Get Beat</a>
     </div>
   </nav>
 
@@ -734,30 +755,20 @@
 
           <div class="hero-title-row">
             <img src="logo-red.svg" alt="Beat" class="hero-logo">
-            <div>
-              <div class="hero-brand lang-fr" role="presentation">Music<br><span class="accent">Discovery</span></div>
-              <div class="hero-brand lang-en" role="presentation">Music<br><span class="accent">Discovery</span></div>
-            </div>
+            <h1 class="hero-brand" role="presentation">Let your<br><span class="accent">ears lead.</span></h1>
           </div>
 
-          <p class="hero-tagline">What's emerging</p>
-
           <p class="hero-sub lang-fr">
-            <strong>Les artistes partagent leurs meilleurs moments.</strong>
-            Tu fais défiler un feed à ton image.
+            Tes oreilles te guident vers les sons qui montent — pas l’algorithme.<br>
+            Digge tous les sons, pose ta voix sur les instrus, fais monter ceux qui le méritent.
           </p>
           <p class="hero-sub lang-en">
-            <strong>Artists share their best moments.</strong>
-            Scroll through a feed tailored to you.
+            Your ears guide you to the sounds on the rise — not the algorithm.<br>
+            Dig every sound, lay your voice on the beats, push what deserves to rise.
           </p>
 
-
           <div class="hero-actions">
-            <a href="/early-access" class="btn-primary lang-fr">Rejoindre l’early access</a>
-            <a href="/early-access" class="btn-primary lang-en">Join early access</a>
-
-            <a href="#concept" class="btn-secondary lang-fr">Voir le concept</a>
-            <a href="#concept" class="btn-secondary lang-en">See the concept</a>
+            <a href="#get" class="btn-primary">Get Beat</a>
           </div>
 
           <div class="store-badges">
@@ -781,143 +792,128 @@
       </div>
     </section>
 
-    <section id="concept" class="section reveal">
+    <section id="dig" class="section reveal">
       <div class="section-inner">
         <div class="section-header">
-          <div class="section-label lang-fr">Le concept</div>
-          <div class="section-label lang-en">The concept</div>
+          <div class="section-label lang-fr">Digger</div>
+          <div class="section-label lang-en">Dig</div>
 
-          <h1 class="lang-fr">Découvrez de nouveaux artistes</h1>
-          <h1 class="lang-en">Discover new artists</h1>
+          <h2 class="lang-fr">Fais monter les sons, pas l’algo</h2>
+          <h2 class="lang-en">You make sounds rise, not the algorithm</h2>
 
           <p class="section-lead lang-fr">
-            Un <strong>feed fluide</strong> dans lequel les nouveautés se rendent visibles et les auditeurs explorent, réagissent et retrouvent les artistes sur leurs plateformes préférées.
-            Chaque découverte est un pari. <strong>Des extraits courts. Pas de pub. Pas de paywall.</strong>
+            Aucune machine ne décide à ta place. Tu choisis tes critères — genre, zone, BPM, type de son — et tu digges. Tu paries tes échos sur les sons qui vont percer. Plus ton oreille voit juste, plus tu montes : <strong>Listener → Digger → Tastemaker → Legend.</strong>
           </p>
           <p class="section-lead lang-en">
-            A <strong>smooth feed</strong> where new music surfaces and listeners explore, react and find artists on their favorite platforms.
-            Every discovery is a bet. <strong>Short tracks. No ads. No paywall.</strong>
+            No machine decides for you. You set your criteria — genre, location, BPM, sound type — and you dig. You bet your echos on the sounds about to break. The sharper your ear, the higher you climb: <strong>Listener → Digger → Tastemaker → Legend.</strong>
           </p>
         </div>
 
         <div class="feature-grid">
           <div class="feature-card">
-            <div class="mini-label lang-fr">Découverte</div>
-            <div class="mini-label lang-en">Discovery</div>
-            <h3 class="lang-fr">Un feed pensé pour aller vite</h3>
-            <h3 class="lang-en">A feed built for speed</h3>
-            <p class="lang-fr">Tu découvres de nouveaux artistes sans chercher. Tu écoutes, tu passes au suivant.</p>
-            <p class="lang-en">You discover new artists without searching. Swipe, listen, move to the next one.</p>
+            <h3 class="lang-fr">Tes critères</h3>
+            <h3 class="lang-en">Your terms</h3>
+            <p class="lang-fr">Genre, zone, BPM, instru ou morceau. Toi aux commandes.</p>
+            <p class="lang-en">Genre, location, BPM, beat or track. You’re in control.</p>
           </div>
 
           <div class="feature-card">
-            <div class="mini-label lang-fr">Audio first</div>
-            <div class="mini-label lang-en">Audio first</div>
-            <h3 class="lang-fr">La musique avant le reste</h3>
-            <h3 class="lang-en">Music comes first</h3>
-            <p class="lang-fr">Le focus est sur l’audio. Pas besoin de clip pour capter l’attention.</p>
-            <p class="lang-en">The focus is on audio. No video needed to earn attention.</p>
+            <h3 class="lang-fr">Les échos</h3>
+            <h3 class="lang-en">The echos</h3>
+            <p class="lang-fr">Une seule monnaie. Tu paries dessus, tu en gagnes quand tu vois juste.</p>
+            <p class="lang-en">One currency. Bet it, earn it when you call it right.</p>
           </div>
 
           <div class="feature-card">
-            <div class="mini-label lang-fr">Humain</div>
-            <div class="mini-label lang-en">Human</div>
-            <h3 class="lang-fr">Des signaux envoyés par la communauté</h3>
-            <h3 class="lang-en">Signals sent by the community</h3>
-            <p class="lang-fr">Ce qui monte, c’est ce que les gens aiment vraiment — pas ce qui paye le plus.</p>
-            <p class="lang-en">What rises is what people truly love — not what pays the most.</p>
+            <h3 class="lang-fr">Sans algo</h3>
+            <h3 class="lang-en">No algorithm</h3>
+            <p class="lang-fr">Ce qui monte, c’est ce que les oreilles humaines font monter — pas ce qui paye.</p>
+            <p class="lang-en">What rises is what human ears push up — not what pays.</p>
           </div>
         </div>
       </div>
     </section>
 
 
-    <section id="roles" class="section reveal">
+    <section id="studio" class="section reveal">
       <div class="section-inner">
         <div class="section-header">
-          <div class="section-label lang-fr">Pour les artistes</div>
-          <div class="section-label lang-en">For artists</div>
+          <div class="section-label lang-fr">Studio</div>
+          <div class="section-label lang-en">Studio</div>
 
-          <h2 class="lang-fr">Gagne en visibilité</h2>
-          <h2 class="lang-en">Grow your audience</h2>
+          <h2 class="lang-fr">Essaie l’instru avant de l’acheter</h2>
+          <h2 class="lang-en">Try the beat before you buy it</h2>
 
           <p class="section-lead lang-fr">
-            Comment se faire connaître en tant qu’artiste émergent ? Beat est un outil de <strong>promotion musicale</strong> qui te connecte à des auditeurs du monde entier.
-            Que tu sois à Rennes, Berlin, Lagos ou Tokyo — <strong>gagne en visibilité</strong> sans budget pub.
+            Une instru t’inspire ? Pose ta voix dessus directement dans Beat. Garde tes prises, écris et réutilise tes textes dans ton carnet de paroles. Elle te plaît ? Rebondis vers la marketplace pour l’acheter. Tes enregistrements restent sur ton appareil — <strong>rien n’est uploadé.</strong>
           </p>
           <p class="section-lead lang-en">
-            How to get listeners as an emerging artist? Beat is a <strong>music promotion</strong> tool that connects you with listeners worldwide.
-            Whether you’re in Rennes, Berlin, Lagos or Tokyo — <strong>grow your audience</strong> with no ad budget.
+            A beat inspires you? Lay your voice over it right inside Beat. Keep your takes, write and reuse your lyrics in your notebook. Love it? Bounce to the marketplace to buy it. Your recordings stay on your device — <strong>nothing is uploaded.</strong>
           </p>
         </div>
 
         <div class="feature-grid">
           <div class="feature-card">
-            <div class="mini-label lang-fr">Visibilité</div>
-            <div class="mini-label lang-en">Visibility</div>
-            <h3 class="lang-fr">Localement et partout</h3>
-            <h3 class="lang-en">Local and global</h3>
-            <p class="lang-fr">Ta musique peut circuler dans ta ville comme à l’autre bout du monde grâce aux filtres et à la découverte par zones.</p>
-            <p class="lang-en">Your music can circulate in your city or across the world through filters and location-based discovery.</p>
+            <h3 class="lang-fr">Pose ta voix</h3>
+            <h3 class="lang-en">Lay it down</h3>
+            <p class="lang-fr">Sur les instrus du Tube, essaie ton flow en vrai.</p>
+            <p class="lang-en">Try your flow for real over the beats in the Tube.</p>
           </div>
 
           <div class="feature-card">
-            <div class="mini-label lang-fr">Fanbase</div>
-            <div class="mini-label lang-en">Fanbase</div>
-            <h3 class="lang-fr">Des vraies personnes, pas du budget</h3>
-            <h3 class="lang-en">Real people, not paid reach</h3>
-            <p class="lang-fr">Ta traction vient d’auditeurs engagés, pas d’un budget média ni d’un placement algorithmique.</p>
-            <p class="lang-en">Your traction comes from engaged listeners, not media budget or algorithmic placement.</p>
+            <h3 class="lang-fr">Carnet de paroles</h3>
+            <h3 class="lang-en">Lyrics notebook</h3>
+            <p class="lang-fr">Tes textes sauvegardés, éditables, réutilisables.</p>
+            <p class="lang-en">Your lyrics saved, editable, reusable.</p>
           </div>
 
           <div class="feature-card">
-            <div class="mini-label lang-fr">Produit</div>
-            <div class="mini-label lang-en">Product</div>
-            <h3 class="lang-fr">Pas de streaming infini</h3>
-            <h3 class="lang-en">Not endless streaming</h3>
-            <p class="lang-fr">Beat n’essaie pas d’être une plateforme de streaming. C’est un espace de découverte rapide, frais et utile.</p>
-            <p class="lang-en">Beat is not trying to be a streaming platform. It’s a fast, fresh, useful discovery space.</p>
+            <h3 class="lang-fr">Tes prises</h3>
+            <h3 class="lang-en">Your takes</h3>
+            <p class="lang-fr">Enregistre, garde, réécoute. En local, privé.</p>
+            <p class="lang-en">Record, keep, replay. Local and private.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="how" class="section reveal">
+    <section id="bridge" class="section reveal">
       <div class="section-inner">
         <div class="section-header">
-          <div class="section-label lang-fr">Comment ça marche</div>
-          <div class="section-label lang-en">How it works</div>
+          <div class="section-label lang-fr">Le pont</div>
+          <div class="section-label lang-en">The bridge</div>
 
-          <h2 class="lang-fr">Trois étapes, c’est tout</h2>
-          <h2 class="lang-en">Three steps, that’s it</h2>
+          <h2 class="lang-fr">Tes sons, vus par de vraies oreilles</h2>
+          <h2 class="lang-en">Your sounds, heard by real ears</h2>
 
-          <p class="section-lead lang-fr">Crée ton profil. Explore le Tube. Réagis ou publie.</p>
-          <p class="section-lead lang-en">Create your profile. Explore the Tube. React or publish.</p>
+          <p class="section-lead lang-fr">
+            Balance ton instru ou ton morceau dans le Tube. De vrais auditeurs le découvrent, le testent, le font monter. Quand ils accrochent, ils rebondissent direct vers tes plateformes — streaming pour t’écouter, marketplace pour acheter ton instru. <strong>Beat est le pont entre les deux.</strong>
+          </p>
+          <p class="section-lead lang-en">
+            Drop your beat or your track in the Tube. Real listeners discover it, test it, make it rise. When they connect, they bounce straight to your platforms — streaming to hear you, marketplace to buy your beat. <strong>Beat is the bridge between the two.</strong>
+          </p>
         </div>
 
-        <div class="steps">
-          <div class="step-card">
-            <div class="step-num">1</div>
-            <h3 class="lang-fr">Crée ton profil</h3>
-            <h3 class="lang-en">Create your profile</h3>
-            <p class="lang-fr">Choisis tes genres, tes zones et tes préférences. Le Tube s’adapte à toi.</p>
-            <p class="lang-en">Choose your genres, locations, and preferences. The Tube adapts to you.</p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3 class="lang-fr">Le pont</h3>
+            <h3 class="lang-en">The bridge</h3>
+            <p class="lang-fr">Beat relie le streaming (Spotify, YouTube, Deezer…) et les marketplaces d’instrus (BeatStars, Airbit).</p>
+            <p class="lang-en">Beat links streaming (Spotify, YouTube, Deezer…) and beat marketplaces (BeatStars, Airbit).</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-num">2</div>
-            <h3 class="lang-fr">Explore le Tube</h3>
-            <h3 class="lang-en">Explore the Tube</h3>
-            <p class="lang-fr">Découvre de nouveaux sons. Le feed s'adapte à tes goûts, tu swipes et tu découvres.</p>
-            <p class="lang-en">Discover new sounds. The feed adapts to your taste, you swipe and discover.</p>
+          <div class="feature-card">
+            <h3 class="lang-fr">Pas de budget pub</h3>
+            <h3 class="lang-en">No ad budget</h3>
+            <p class="lang-fr">Ta traction vient de vraies oreilles, pas d’un placement payant.</p>
+            <p class="lang-en">Your traction comes from real ears, not paid placement.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-num">3</div>
-            <h3 class="lang-fr">Réagis ou publie</h3>
-            <h3 class="lang-en">React or publish</h3>
-            <p class="lang-fr">Push les sons que tu aimes. Artiste ? Upload ton son, découpe ta boucle, ajoute tes liens (Spotify, YouTube, Deezer…).</p>
-            <p class="lang-en">Push the tracks you love. Artist? Upload your track, trim your loop, add your links (Spotify, YouTube, Deezer…).</p>
+          <div class="feature-card">
+            <h3 class="lang-fr">Un clic pour vendre</h3>
+            <h3 class="lang-en">One tap to sell</h3>
+            <p class="lang-fr">Depuis ton son, l’auditeur file vers ta page de vente ou d’écoute.</p>
+            <p class="lang-en">From your sound, listeners go straight to your sale or listen page.</p>
           </div>
         </div>
       </div>
@@ -926,36 +922,44 @@
     <section class="section reveal">
       <div class="section-inner">
         <div class="positioning">
-          <p class="lang-fr"><strong>Beat est un espace de découverte musicale.</strong><br>Là où les scènes émergent.</p>
-          <p class="lang-en"><strong>Beat is a music discovery space.</strong><br>Where scenes emerge.</p>
+          <p class="lang-fr">Ce qui monte, c’est ce que <strong>les oreilles humaines</strong> font monter.</p>
+          <p class="lang-en">What rises is what <strong>human ears</strong> push up.</p>
         </div>
       </div>
     </section>
 
-    <section class="section reveal">
+    <section id="get" class="section reveal">
       <div class="section-inner">
         <div class="cta">
-          <div class="section-label lang-fr">Early access</div>
-          <div class="section-label lang-en">Early access</div>
+          <div class="section-label lang-fr">Get Beat</div>
+          <div class="section-label lang-en">Get Beat</div>
 
-          <h2 class="lang-fr">Trouve le son qui te fait vibrer.</h2>
-          <h2 class="lang-en">Find what makes you vibe.</h2>
+          <h2 class="lang-fr">Laisse tes oreilles te guider.</h2>
+          <h2 class="lang-en">Let your ears lead.</h2>
 
           <p class="lang-fr">
-Pas de pub. Pas de paywall. Juste des artistes, des auditeurs et une nouvelle manière de découvrir la musique.
+            Pas de pub. Pas de paywall. Juste des sons, des oreilles humaines et une nouvelle façon de découvrir — sans algorithme. Digge, pose ta voix, dépose les tiens.
           </p>
           <p class="cta-seo lang-fr">
-            Beat est une plateforme de découverte musicale et de promotion pour artistes émergents et indépendants. Découvre de nouveaux sons, soutiens les artistes que tu aimes et retrouve-les sur tes plateformes préférées.
+            Beat est le pont entre le streaming et les marketplaces d’instrus. Digge des instrus, pose ta voix dessus, dépose tes sons et laisse de vraies oreilles les faire monter.
           </p>
           <p class="lang-en">
-            No ads. No paywall. Just artists, listeners, and a new way to discover music.
+            No ads. No paywall. Just sounds, human ears and a new way to discover — without the algorithm. Dig, lay your voice, drop your own.
           </p>
           <p class="cta-seo lang-en">
-            Beat is a music discovery and promotion platform for emerging and independent artists. Discover new sounds, support the artists you love and find them on your favorite platforms.
+            Beat is the bridge between streaming and beat marketplaces. Dig beats, lay your voice over them, drop your sounds and let real ears push them up.
           </p>
 
-          <a href="/early-access" class="btn-primary lang-fr">Rejoindre l’early access</a>
-          <a href="/early-access" class="btn-primary lang-en">Join early access</a>
+          <div class="store-badges" style="justify-content:center;">
+            <a href="https://apps.apple.com/app/id6761978978" target="_blank" rel="noopener">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" class="store-badge">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.beatitube.app" target="_blank" rel="noopener">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="store-badge">
+            </a>
+          </div>
+          <div class="store-note lang-fr">Disponible sur iOS et Android</div>
+          <div class="store-note lang-en">Available on iOS and Android</div>
         </div>
       </div>
     </section>
